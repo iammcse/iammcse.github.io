@@ -63,12 +63,12 @@ console.log(queryString);
 // ?product=shirt&color=blue&newuser&size=m
 const urlParams = new URLSearchParams(queryString);
 
-const morningParam = urlParams.get('morningParam')
-console.log(morningParam);
+const morningParam = urlParams.get("morningParam")
+console.log('morningParam' + morningParam);
 // shirt
 
-const afternoonParam = urlParams.get('afternoonParam')
-console.log(afternoonParam);
+const afternoonParam = urlParams.get("afternoonParam")
+console.log('afternoonParam' + afternoonParam);
 // blue
 
 
@@ -81,23 +81,21 @@ const afternoonSession = new Date(today.getFullYear(),today.getMonth(),today.get
 const midnight = new Date(today.getFullYear(),today.getMonth(),today.getDate(),23,59,59,999);
 // set number of seconds before launch
 
-if (morningParam!== ""){
 
-  const offsetMilliSecondsValue = morningParam; // Morning from Param 
+var offsetMilliSecondsValue = "0" ;
+var afternoon_offsetMilliSecondsValue = "0" ;
 
+if (morningParam !== ""){
+   offsetMilliSecondsValue = morningParam; // Morning from Param 
 }else{
-
-  const offsetMilliSecondsValue = 1250; // Morning default
+   offsetMilliSecondsValue = 1250; // Morning default
 }
 
 if (afternoonParam !== ""){
-
-  const afternoon_offsetMilliSecondsValue = afternoonParam; // afternoon from Param
+   afternoon_offsetMilliSecondsValue = afternoonParam; // afternoon from Param
 }
 else{
-
-  const afternoon_offsetMilliSecondsValue = 775; // afternoon default
-
+   afternoon_offsetMilliSecondsValue = 775; // afternoon default
 }
 
 
