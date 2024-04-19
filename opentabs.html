@@ -50,27 +50,22 @@
   }   
    </style>
    
-  
-  
-  
-  </head>
+    </head>
 <body>
 
 
 <script>
+
 const queryString = window.location.search;
-console.log(queryString);
-// ?product=shirt&color=blue&newuser&size=m
+console.log("queryString: " + queryString);
+// ?server=shirt&color=blue&newuser&size=m
 const urlParams = new URLSearchParams(queryString);
-
+const serverParam = urlParams.get("serverParam");
+console.log('serverParam: ' + serverParam);
 const morningParam = urlParams.get("morningParam")
-console.log('morningParam' + morningParam);
-// shirt
-
+console.log('morningParam: ' + morningParam);
 const afternoonParam = urlParams.get("afternoonParam")
-console.log('afternoonParam' + afternoonParam);
-// blue
-
+console.log('afternoonParam: ' + afternoonParam);
 
 // Declare constants 
 const ksc_URL = "https://kscgolf2.noq.com.hk/?noq_c=kscgolf&noq_r=https%3A%2F%2Fbooking.kscgolf.org.hk%2FwaitingRoom%3F";
@@ -81,21 +76,132 @@ const afternoonSession = new Date(today.getFullYear(),today.getMonth(),today.get
 const midnight = new Date(today.getFullYear(),today.getMonth(),today.getDate(),23,59,59,999);
 // set number of seconds before launch
 
-
 var offsetMilliSecondsValue = "0" ;
 var afternoon_offsetMilliSecondsValue = "0" ;
 
-if (morningParam !== ""){
-   offsetMilliSecondsValue = morningParam; // Morning from Param 
-}else{
-   offsetMilliSecondsValue = 1250; // Morning default
+const currentServer = {morning: 1000, afternoon: 500};
+
+const KServer01 = {morning: 1500, afternoon: 950};
+const KServer02 = {morning: 1510, afternoon: 910};
+const KServer03 = {morning: 1520, afternoon: 920};
+const KServer04 = {morning: 1530, afternoon: 930};
+const KServer05 = {morning: 1540, afternoon: 940};
+const KServer06 = {morning: 1550, afternoon: 950};
+const KServer07 = {morning: 1560, afternoon: 950};
+const KServer08 = {morning: 1570, afternoon: 960};
+const KServer09 = {morning: 1580, afternoon: 970};
+const KServer10 = {morning: 1590, afternoon: 980};
+const KServer11 = {morning: 1600, afternoon: 990};
+const KServer12 = {morning: 1610, afternoon: 1000};
+const KServer13 = {morning: 1620, afternoon: 1010};
+const KServer14 = {morning: 1630, afternoon: 1020};
+const win7ssd = {morning: 2100, afternoon:1200};
+const my5600x = {morning: 750, afternoon: 450};
+
+switch(serverParam) {
+  case "KServer01":
+    currentServer.morning = KServer01.morning ;
+    currentServer.afternoon = KServer01.afternoon;
+    console.log("switching KServer01");
+      break;
+  case "KServer02":
+    currentServer.morning = KServer02.morning ;
+    currentServer.afternoon = KServer02.afternoon;
+    console.log("switching KServer02");
+    break;
+  case "KServer03":
+    currentServer.morning = KServer03.morning ;
+    currentServer.afternoon = KServer03.afternoon;
+    console.log("switching KServer03");
+  break;
+  case "KServer04":
+    currentServer.morning = KServer04.morning ;
+    currentServer.afternoon = KServer04.afternoon;
+    console.log("switching KServer04");
+  break;
+  case "KServer05":
+    currentServer.morning = KServer05.morning ;
+    currentServer.afternoon = KServer05.afternoon;
+    console.log("switching KServer05");
+  break;
+  case "KServer06":
+    currentServer.morning = KServer06.morning ;
+    currentServer.afternoon = KServer06.afternoon;
+    console.log("switching KServer06");
+  break;
+  case "KServer07":
+    currentServer.morning = KServer07.morning ;
+    currentServer.afternoon = KServer07.afternoon;
+    console.log("switching KServer07");
+  break;
+  case "KServer08":
+    currentServer.morning = KServer08.morning ;
+    currentServer.afternoon = KServer08.afternoon;
+    console.log("switching KServer08");
+  break;
+  case "KServer09":
+    currentServer.morning = KServer09.morning ;
+    currentServer.afternoon = KServer09.afternoon;
+    console.log("switching KServer09");
+  break;
+  case "KServer10":
+    currentServer.morning = KServer10.morning ;
+    currentServer.afternoon = KServer10.afternoon;
+    console.log("switching KServer10");
+  break;
+  case "KServer11":
+    currentServer.morning = KServer11.morning ;
+    currentServer.afternoon = KServer11.afternoon;
+    console.log("switching KServer11");
+  break;
+  case "KServer12":
+    currentServer.morning = KServer12.morning ;
+    currentServer.afternoon = KServer12.afternoon;
+    console.log("switching KServer12");
+  break;
+  case "KServer13":
+    currentServer.morning = KServer13.morning ;
+    currentServer.afternoon = KServer13.afternoon;
+    console.log("switching KServer13");
+  break;
+  case "KServer14":
+    currentServer.morning = KServer14.morning ;
+    currentServer.afternoon = KServer14.afternoon;
+    console.log("switching KServer14");
+  break;
+  case "win7ssd":
+    currentServer.morning = win7ssd.morning ;
+    currentServer.afternoon = win7ssd.afternoon;
+    console.log("switching win7ssd");
+  break;
+  case "my5600x":
+    currentServer.morning = my5600x.morning ;
+    currentServer.afternoon = my5600x.afternoon;
+    console.log("switching my5600x");
+  break;
+    
+  default:
+  currentServer.morning = 1600;
+  currentServer.afternoon = 1000;
+  console.log("switching to Default");
 }
 
-if (afternoonParam !== ""){
+
+if (morningParam !== null && morningParam !== "" && morningParam !== "0"){
+   offsetMilliSecondsValue = morningParam; // Morning from Param 
+   console.log("morningParam is NOT empty");
+}else{
+   offsetMilliSecondsValue = currentServer.morning; // Morning default
+   console.log("morningParam is empty");
+}
+
+if (afternoonParam !== null && afternoonParam !== "" && afternoonParam !== "0"){
    afternoon_offsetMilliSecondsValue = afternoonParam; // afternoon from Param
+   console.log("afternoonParam is NOT Empty");
 }
 else{
-   afternoon_offsetMilliSecondsValue = 775; // afternoon default
+   afternoon_offsetMilliSecondsValue = currentServer.afternoon; // afternoon default
+   console.log("afternoonParam is Empty");
 }
 
 
@@ -161,8 +267,6 @@ var x = setInterval(function() {
   }
 }, 500);
 </script>
-
-
 
 
 <p id="triggerDate"></p>
