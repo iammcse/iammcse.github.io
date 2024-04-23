@@ -67,7 +67,8 @@ console.log('morningParam: ' + morningParam);
 const afternoonParam = urlParams.get("afternoonParam")
 console.log('afternoonParam: ' + afternoonParam);
 
-let offset = urlParams.get("offset")
+//let offset = urlParams.get("offset");
+let offset = 0;
 
 if (offset == null || offset == "" ){
   
@@ -90,23 +91,23 @@ var offsetMilliSecondsValue = "0" ;
 var afternoon_offsetMilliSecondsValue = "0" ;
 
 const currentServer = {morning: 1000, afternoon: 500};
-
-const KServer01 = {morning: 350, afternoon: 550};
-const KServer02 = {morning: 350, afternoon: 825};
-const KServer03 = {morning: 350, afternoon: 550};
-const KServer04 = {morning: 350, afternoon: 825};
-const KServer05 = {morning: 350, afternoon: 550};
-const KServer06 = {morning: 350, afternoon: 825};
-const KServer07 = {morning: 350, afternoon: 550};
-const KServer08 = {morning: 350, afternoon: 825};
-const KServer09 = {morning: 350, afternoon: 550};
-const KServer10 = {morning: 350, afternoon: 825};
-const KServer11 = {morning: 350, afternoon: 550};
-const KServer12 = {morning: 350, afternoon: 825};
-const KServer13 = {morning: 350, afternoon: 550};
-const KServer14 = {morning: 350, afternoon: 825};
-const win7ssd = {morning: 2150, afternoon:1000};
-const my5600x = {morning: 350, afternoon: 450};
+// 350 550/825
+const KServer01 = {morning: 300, afternoon: 300};
+const KServer02 = {morning: 325, afternoon: 325};
+const KServer03 = {morning: 300, afternoon: 350};
+const KServer04 = {morning: 325, afternoon: 375};
+const KServer05 = {morning: 300, afternoon: 300};
+const KServer06 = {morning: 325, afternoon: 325};
+const KServer07 = {morning: 300, afternoon: 300};
+const KServer08 = {morning: 325, afternoon: 325};
+const KServer09 = {morning: 300, afternoon: 300};
+const KServer10 = {morning: 325, afternoon: 325};
+const KServer11 = {morning: 300, afternoon: 300};
+const KServer12 = {morning: 325, afternoon: 325};
+const KServer13 = {morning: 300, afternoon: 300};
+const KServer14 = {morning: 325, afternoon: 325};
+const win7ssd = {morning: 2150, afternoon:1000}; //2150 1000
+const my5600x = {morning: 300, afternoon: 300}; // 350 450
 
 switch(serverParam) {
   case "KServer01":
