@@ -67,8 +67,8 @@ console.log('morningParam: ' + morningParam);
 const afternoonParam = urlParams.get("afternoonParam")
 console.log('afternoonParam: ' + afternoonParam);
 
-//let offset = urlParams.get("offset");
-let offset = 0;
+let offset = urlParams.get("offset");
+//let offset = 0;
 
 if (offset == null || offset == "" ){
   
@@ -90,25 +90,24 @@ const midnight = new Date(today.getFullYear(),today.getMonth(),today.getDate(),2
 var offsetMilliSecondsValue = "0" ;
 var afternoon_offsetMilliSecondsValue = "0" ;
 
-const currentServer = {morning: 825, afternoon: 550};
+const currentServer = {morning: 1550, afternoon: 550};
 
-const KServer01 = {morning: 550, afternoon: 550};
-const KServer02 = {morning: 550, afternoon: 550};
-const KServer03 = {morning: 550, afternoon: 550};
-const KServer04 = {morning: 550, afternoon: 550};
-
-const KServer05 = {morning: 550, afternoon: 550};
-const KServer06 = {morning: 550, afternoon: 550};
-const KServer07 = {morning: 550, afternoon: 550};
-const KServer08 = {morning: 550, afternoon: 550};
-const KServer09 = {morning: 550, afternoon: 550};
-const KServer10 = {morning: 550, afternoon: 550};
-const KServer11 = {morning: 550, afternoon: 550};
-const KServer12 = {morning: 550, afternoon: 550};
-const KServer13 = {morning: 550, afternoon: 550};
-const KServer14 = {morning: 550, afternoon: 550}; // 350 550/825
+const KServer01 = {morning: 1475, afternoon: 550};
+const KServer02 = {morning: 1475, afternoon: 550};
+const KServer03 = {morning: 1475, afternoon: 550};
+const KServer04 = {morning: 475, afternoon: 550};
+const KServer05 = {morning: 475, afternoon: 550};
+const KServer06 = {morning: 475, afternoon: 550};
+const KServer07 = {morning: 950, afternoon: 550};
+const KServer08 = {morning: 950, afternoon: 550};
+const KServer09 = {morning: 950, afternoon: 550};
+const KServer10 = {morning: 950, afternoon: 550};
+const KServer11 = {morning: 1550, afternoon: 550};
+const KServer12 = {morning: 1550, afternoon: 550};
+const KServer13 = {morning: 1550, afternoon: 550};
+const KServer14 = {morning: 1550, afternoon: 550}; // 350 550/825
 const win7ssd = {morning: 2150, afternoon:1000}; //2150 1000
-const my5600x = {morning: 450, afternoon: 450}; // 350 450
+const my5600x = {morning: 300, afternoon: 450}; // 350 450
 
 switch(serverParam) {
   case "KServer01":
