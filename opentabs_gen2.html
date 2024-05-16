@@ -280,13 +280,25 @@
         // Find the subtractMilliSecondsValue between now and the count down date
           var subtractMilliSecondsValue = countDownDate - now.getTime();
           
-           function timeToOpen() {
-            window.open(ksc_URL, "_self");
-              //alert(myInputTime);
-           }
+          //  function timeToOpen() {
+          //   window.open(ksc_URL, "_self");
+          //     //alert(myInputTime);
+          //  }
            
-           setTimeout(timeToOpen, subtractMilliSecondsValue);
+          //  setTimeout(timeToOpen, subtractMilliSecondsValue);
         
+
+           document.getElementsByTagName("body")[0].innerHTML = \
+          "<iframe id=\"testFrame\" \
+          src=\"" + ksc_URL + "\" \
+          style=\"position: absolute; top:0; left:0; right:0; bottom:0; width:100%; height:100%;\"> \
+          <\/iframe>";
+          reloadTimer = setTimeout(
+          function(){ 
+            document.getElementById("testFrame").src=document.getElementById("testFrame").src
+          }, subtractMilliSecondsValue)
+
+
         
         // Update the count down every 1/2 second
         var x = setInterval(function() {
