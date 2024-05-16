@@ -94,7 +94,7 @@ var offsetMilliSecondsValue = "0" ;
 var afternoon_offsetMilliSecondsValue = "0" ;
 
 const currentServer = {morning: 1550, afternoon: 575};
-//575/1550 575
+//575/1550 575 // rere
 //1650 once sunday okay
 const KServer01 = {morning: 1950, afternoon: 1850}; //1850/1750  575/625/675
 const KServer02 = {morning: 1950, afternoon: 1850};
@@ -113,8 +113,8 @@ const KServer14 = {morning: 1950, afternoon: 1850};
 
 const KServer15 = {morning: 1850, afternoon: 1075};
 
-const win7ssd = {morning: 2150, afternoon: 1000}; //2150 1000
-const my5600x = {morning: 1600, afternoon: 1500}; // 350 450 - 600 works well with repeat once on Monday afternoon // testing 3 tabs 600 500 400
+const win7ssd = {morning: 2150, afternoon: 1850}; //2150 1000
+const my5600x = {morning: 1600, afternoon: 1450}; // 350 450 - 600 works well with repeat once on Monday afternoon // testing 3 tabs 600 500 400
 
 switch(serverParam) {
   case "KServer01":
@@ -283,17 +283,6 @@ console.log("offsetMilliSecondsValue: " + offsetMilliSecondsValue );
    }
    
    setTimeout(timeToOpen, subtractMilliSecondsValue);
-
-//<iframe id="testFrame" src="https://kscgolf2.noq.com.hk/?noq_c=kscgolf&noq_r=https%3A%2F%2Fbooking.kscgolf.org.hk%2FwaitingRoom%3F" style="position: absolute; top:0; left:0; right:0; bottom:0; width:100%; height:100%;" onload="setTimeout(document.getElementById('testFrame').contentWindow.location.reload(), 10000);"></iframe>
-
-document.getElementsByTagName("body")[0].innerHTML = "<iframe id=\"testFrame\" src=\"" + window.location.toString() + "\"       style=\"position: absolute; top:0; left:0; right:0; bottom:0; width:100%; height:100%;\"> <\/iframe>";
-reloadTimer = setInterval(
-    function(){ 
-        document.getElementById("testFrame").src=document.getElementById("testFrame").src
-    },
-    10000
-)
-
 
 
 // Update the count down every 1/2 second

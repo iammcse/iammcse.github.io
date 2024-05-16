@@ -54,280 +54,262 @@
    </style>
    
     </head>
-
-
- 
-
 <body>
 
 
-    <script>
+<script>
 
-        const queryString = window.location.search;
-        console.log("queryString: " + queryString);
-        // ?server=shirt&color=blue&newuser&size=m
-        const urlParams = new URLSearchParams(queryString);
-        const serverParam = urlParams.get("serverParam");
-        console.log('serverParam: ' + serverParam);
-        const morningParam = urlParams.get("morningParam")
-        console.log('morningParam: ' + morningParam);
-        const afternoonParam = urlParams.get("afternoonParam")
-        console.log('afternoonParam: ' + afternoonParam);
-        
-        let offset = urlParams.get("offset");
-        //let offset = 0;
-        
-        if (offset == null || offset == "" ){
-          
-          offset = 0; 
-        
-        }
-        console.log('offset: ' + offset);
-        
-        
-        // Declare constants 
-        const ksc_URL = "https://kscgolf2.noq.com.hk/?noq_c=kscgolf&noq_r=https%3A%2F%2Fbooking.kscgolf.org.hk%2FwaitingRoom%3F";
-        //7 numbers specify [year], [month], [day], [hour], [minute], [second], and [millisecond] (in that order)
-        const today = new Date();
-        const morningSession = new Date(today.getFullYear(),today.getMonth(),today.getDate(),9,30,0,0);
-        const afternoonSession = new Date(today.getFullYear(),today.getMonth(),today.getDate(),17,0,0,0);
-        const midnight = new Date(today.getFullYear(),today.getMonth(),today.getDate(),23,59,59,999);
-        // set number of seconds before launch
-        
-        var offsetMilliSecondsValue = "0" ;
-        var afternoon_offsetMilliSecondsValue = "0" ;
-        
-        const currentServer = {morning: 1550, afternoon: 575};
-        //575/1550 575
-        //1650 once sunday okay
-        const KServer01 = {morning: 1950, afternoon: 1850}; //1850/1750  575/625/675
-        const KServer02 = {morning: 1950, afternoon: 1850};
-        const KServer03 = {morning: 1950, afternoon: 1850}; //1550 Morning thursday GOOD
-        const KServer04 = {morning: 1950, afternoon: 1850}; // 400 GOOD 1450 Morning MON THUR no reload GOOD
-        const KServer05 = {morning: 1950, afternoon: 1850}; 
-        const KServer06 = {morning: 1950, afternoon: 1850}; 
-        const KServer07 = {morning: 1950, afternoon: 1850};
-        const KServer08 = {morning: 1950, afternoon: 1850}; //1050 Morning thursday ok
-        const KServer09 = {morning: 1950, afternoon: 1850};
-        const KServer10 = {morning: 1950, afternoon: 1850}; 
-        const KServer11 = {morning: 1950, afternoon: 1850};// 575 675 GOOD
-        const KServer12 = {morning: 1950, afternoon: 1850};
-        const KServer13 = {morning: 1950, afternoon: 1850}; //1700
-        const KServer14 = {morning: 1950, afternoon: 1850};
-        
-        const KServer15 = {morning: 1850, afternoon: 1075};
-        
-        const win7ssd = {morning: 2150, afternoon:1000}; //2150 1000
-        const my5600x = {morning: 600, afternoon: 600}; // 350 450 - 600 works well with repeat once on Monday afternoon // testing 3 tabs 600 500 400
-        
-        switch(serverParam) {
-          case "KServer01":
-            currentServer.morning = KServer01.morning ;
-            currentServer.afternoon = KServer01.afternoon;
-            document.title = "KServer01";
-            console.log("switching KServer01");
-              break;
-          case "KServer02":
-            currentServer.morning = KServer02.morning ;
-            currentServer.afternoon = KServer02.afternoon;
-            document.title = "KServer02";
-            console.log("switching KServer02");
-            break;
-          case "KServer03":
-            currentServer.morning = KServer03.morning ;
-            currentServer.afternoon = KServer03.afternoon;
-            document.title = "KServer03";
-            console.log("switching KServer03");
-          break;
-          case "KServer04":
-            currentServer.morning = KServer04.morning ;
-            currentServer.afternoon = KServer04.afternoon;
-            document.title = "KServer04";
-            console.log("switching KServer04");
-          break;
-          case "KServer05":
-            currentServer.morning = KServer05.morning ;
-            currentServer.afternoon = KServer05.afternoon;
-            document.title = "KServer05";
-            console.log("switching KServer05");
-          break;
-          case "KServer06":
-            currentServer.morning = KServer06.morning ;
-            currentServer.afternoon = KServer06.afternoon;
-            document.title = "KServer06";
-            console.log("switching KServer06");
-          break;
-          case "KServer07":
-            currentServer.morning = KServer07.morning ;
-            currentServer.afternoon = KServer07.afternoon;
-            document.title = "KServer07";
-            console.log("switching KServer07");
-          break;
-          case "KServer08":
-            currentServer.morning = KServer08.morning ;
-            currentServer.afternoon = KServer08.afternoon;
-            document.title = "KServer08";
-            console.log("switching KServer08");
-          break;
-          case "KServer09":
-            currentServer.morning = KServer09.morning ;
-            currentServer.afternoon = KServer09.afternoon;
-            document.title = "KServer09";
-            console.log("switching KServer09");
-          break;
-          case "KServer10":
-            currentServer.morning = KServer10.morning ;
-            currentServer.afternoon = KServer10.afternoon;
-            document.title = "KServer10";
-            console.log("switching KServer10");
-          break;
-          case "KServer11":
-            currentServer.morning = KServer11.morning ;
-            currentServer.afternoon = KServer11.afternoon;
-            document.title = "KServer11";
-            console.log("switching KServer11");
-          break;
-          case "KServer12":
-            currentServer.morning = KServer12.morning ;
-            currentServer.afternoon = KServer12.afternoon;
-            document.title = "KServer12";
-            console.log("switching KServer12");
-          break;
-          case "KServer13":
-            currentServer.morning = KServer13.morning ;
-            currentServer.afternoon = KServer13.afternoon;
-            document.title = "KServer13";
-            console.log("switching KServer13");
-          break;
-          case "KServer14":
-            currentServer.morning = KServer14.morning ;
-            currentServer.afternoon = KServer14.afternoon;
-            document.title = "KServer14";
-            console.log("switching KServer14");
-          break;
-          case "KServer15":
-            currentServer.morning = KServer15.morning ;
-            currentServer.afternoon = KServer15.afternoon;
-            document.title = "KServer15";
-            console.log("switching KServer15");
-          break;
-          case "win7ssd":
-            currentServer.morning = win7ssd.morning ;
-            currentServer.afternoon = win7ssd.afternoon;
-            document.title = "win7ssd";
-            console.log("switching win7ssd");
-          break;
-          case "my5600x":
-            currentServer.morning = my5600x.morning ;
-            currentServer.afternoon = my5600x.afternoon;
-            document.title = "my5600x";
-            console.log("switching my5600x");
-          break;
-            
-          default:
-          currentServer.morning = 1600;
-          currentServer.afternoon = 1000;
-          console.log("switching to Default");
-        }
-        
-        
-        if (morningParam !== null && morningParam !== "" && morningParam !== "0"){
-           offsetMilliSecondsValue = Number(morningParam) + Number(offset); // Morning from Param 
-           console.log("morningParam is NOT empty");
-           console.log("morningParam: " + morningParam + " offset: " + offset);
-        }else{
-           offsetMilliSecondsValue = Number(currentServer.morning) + Number(offset); // Morning default
-           console.log("morningParam is empty");
-           console.log("morningParam: " + currentServer.morning + " offset: " + offset);
-        }
-        
-        if (afternoonParam !== null && afternoonParam !== "" && afternoonParam !== "0"){
-           afternoon_offsetMilliSecondsValue =Number(afternoonParam) + Number(offset); // afternoon from Param
-           console.log("afternoonParam is NOT Empty");
-           console.log("afternoonParam: " + afternoonParam + " offset: " + offset);
-        }
-        else{
-           afternoon_offsetMilliSecondsValue = Number(currentServer.afternoon) + Number(offset); // afternoon default
-           console.log("afternoonParam is Empty");
-           console.log("afternoonParam: " + currentServer.afternoon + " offset: " + offset);
-        }
-        
-        console.log("offsetMilliSecondsValue: " + offsetMilliSecondsValue ); 
-        
-          // Get today's date and time 
-          var now = new Date();
-          var setHour = 0;
-          var setMinute =0;
-          var myInputTime = new Date();
-        
-          if (now.getTime() > morningSession.getTime() && now.getTime() <= afternoonSession.getTime() )    {
-            myInputTime = afternoonSession - afternoon_offsetMilliSecondsValue;
-            //console.log("myInputTime is : " + myInputTime);
-          }
-          else if (now.getTime() > afternoonSession && now.getTime() <= midnight) 
-              {
-              myInputTime = morningSession - offsetMilliSecondsValue + (1000 * 60 * 60 * 24);      
-              console.log(myInputTime);
-              //alert("midnight");
-              }
-          else  {myInputTime = morningSession - offsetMilliSecondsValue;}
-          
-         
-        
-        // Set the date we're counting down to
-        //var countDownDate = new Date(myInputTime).getTime()
-          var countDownDate = myInputTime;
-        // Find the subtractMilliSecondsValue between now and the count down date
-          var subtractMilliSecondsValue = countDownDate - now.getTime();
-          
-          //  function timeToOpen() {
-          //   window.open(ksc_URL, "_self");
-          //     //alert(myInputTime);
-          //  }
-           
-          //  setTimeout(timeToOpen, subtractMilliSecondsValue);
-        
+const queryString = window.location.search;
+console.log("queryString: " + queryString);
+// ?server=shirt&color=blue&newuser&size=m
+const urlParams = new URLSearchParams(queryString);
+const serverParam = urlParams.get("serverParam");
+console.log('serverParam: ' + serverParam);
+const morningParam = urlParams.get("morningParam")
+console.log('morningParam: ' + morningParam);
+const afternoonParam = urlParams.get("afternoonParam")
+console.log('afternoonParam: ' + afternoonParam);
 
-           document.getElementsByTagName("body")[0].innerHTML = \
-          "<iframe id=\"testFrame\" \
-          src=\"" + ksc_URL + "\" \
-          style=\"position: absolute; top:0; left:0; right:0; bottom:0; width:100%; height:100%;\"> \
-          <\/iframe>";
-          reloadTimer = setTimeout(
-          function(){ 
-            document.getElementById("testFrame").src=document.getElementById("testFrame").src
-          }, subtractMilliSecondsValue)
+let offset = urlParams.get("offset");
+//let offset = 0;
+
+if (offset == null || offset == "" ){
+  
+  offset = 0; 
+
+}
+console.log('offset: ' + offset);
 
 
-        
-        // Update the count down every 1/2 second
-        var x = setInterval(function() {
-        
-           // Get today's date and time
-           var nowUpdated = new Date().getTime();
-            
-            // Find the subtractMilliSecondsValue between now and the count down date
-            var distance = countDownDate - nowUpdated;
-        
-          // Time calculations for days, hours, minutes and seconds
-          var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-          var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-          var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-          var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-          var milliseconds = distance % 1000;
-            
-          // Output the result in an element with id="Canvas"
-          document.getElementById("Canvas").innerHTML = days + "d " + hours + "h "
-          + minutes + "m " + seconds + "s " ;
-          //+ milliseconds +"ms"
-            
-          // If the count down is over, write some text 
-          if (distance < 0) {
-            clearInterval(x);
-            document.getElementById("Canvas").innerHTML = "EXPIRED";
-          }
-        }, 500);
-    </script>   
+// Declare constants 
+const ksc_URL = "https://kscgolf2.noq.com.hk/?noq_c=kscgolf&noq_r=https%3A%2F%2Fbooking.kscgolf.org.hk%2FwaitingRoom%3F";
+//7 numbers specify [year], [month], [day], [hour], [minute], [second], and [millisecond] (in that order)
+const today = new Date();
+const morningSession = new Date(today.getFullYear(),today.getMonth(),today.getDate(),9,30,0,0);
+const afternoonSession = new Date(today.getFullYear(),today.getMonth(),today.getDate(),17,0,0,0);
+const midnight = new Date(today.getFullYear(),today.getMonth(),today.getDate(),23,59,59,999);
+// set number of seconds before launch
+
+var offsetMilliSecondsValue = "0" ;
+var afternoon_offsetMilliSecondsValue = "0" ;
+
+const currentServer = {morning: 1550, afternoon: 575};
+//575/1550 575
+//1650 once sunday okay
+const KServer01 = {morning: 1950, afternoon: 1850}; //1850/1750  575/625/675
+const KServer02 = {morning: 1950, afternoon: 1850};
+const KServer03 = {morning: 1950, afternoon: 1850}; //1550 Morning thursday GOOD
+const KServer04 = {morning: 1950, afternoon: 1850}; // 400 GOOD 1450 Morning MON THUR no reload GOOD
+const KServer05 = {morning: 1950, afternoon: 1850}; 
+const KServer06 = {morning: 1950, afternoon: 1850}; 
+const KServer07 = {morning: 1950, afternoon: 1850};
+const KServer08 = {morning: 1950, afternoon: 1850}; //1050 Morning thursday ok
+const KServer09 = {morning: 1950, afternoon: 1850};
+const KServer10 = {morning: 1950, afternoon: 1850}; 
+const KServer11 = {morning: 1950, afternoon: 1850};// 575 675 GOOD
+const KServer12 = {morning: 1950, afternoon: 1850};
+const KServer13 = {morning: 1950, afternoon: 1850}; //1700
+const KServer14 = {morning: 1950, afternoon: 1850};
+
+const KServer15 = {morning: 1850, afternoon: 1075};
+
+const win7ssd = {morning: 2150, afternoon: 1000}; //2150 1000
+const my5600x = {morning: 1600, afternoon: 1500}; // 350 450 - 600 works well with repeat once on Monday afternoon // testing 3 tabs 600 500 400
+
+switch(serverParam) {
+  case "KServer01":
+    currentServer.morning = KServer01.morning ;
+    currentServer.afternoon = KServer01.afternoon;
+    document.title = "KServer01";
+    console.log("switching KServer01");
+      break;
+  case "KServer02":
+    currentServer.morning = KServer02.morning ;
+    currentServer.afternoon = KServer02.afternoon;
+    document.title = "KServer02";
+    console.log("switching KServer02");
+    break;
+  case "KServer03":
+    currentServer.morning = KServer03.morning ;
+    currentServer.afternoon = KServer03.afternoon;
+    document.title = "KServer03";
+    console.log("switching KServer03");
+  break;
+  case "KServer04":
+    currentServer.morning = KServer04.morning ;
+    currentServer.afternoon = KServer04.afternoon;
+    document.title = "KServer04";
+    console.log("switching KServer04");
+  break;
+  case "KServer05":
+    currentServer.morning = KServer05.morning ;
+    currentServer.afternoon = KServer05.afternoon;
+    document.title = "KServer05";
+    console.log("switching KServer05");
+  break;
+  case "KServer06":
+    currentServer.morning = KServer06.morning ;
+    currentServer.afternoon = KServer06.afternoon;
+    document.title = "KServer06";
+    console.log("switching KServer06");
+  break;
+  case "KServer07":
+    currentServer.morning = KServer07.morning ;
+    currentServer.afternoon = KServer07.afternoon;
+    document.title = "KServer07";
+    console.log("switching KServer07");
+  break;
+  case "KServer08":
+    currentServer.morning = KServer08.morning ;
+    currentServer.afternoon = KServer08.afternoon;
+    document.title = "KServer08";
+    console.log("switching KServer08");
+  break;
+  case "KServer09":
+    currentServer.morning = KServer09.morning ;
+    currentServer.afternoon = KServer09.afternoon;
+    document.title = "KServer09";
+    console.log("switching KServer09");
+  break;
+  case "KServer10":
+    currentServer.morning = KServer10.morning ;
+    currentServer.afternoon = KServer10.afternoon;
+    document.title = "KServer10";
+    console.log("switching KServer10");
+  break;
+  case "KServer11":
+    currentServer.morning = KServer11.morning ;
+    currentServer.afternoon = KServer11.afternoon;
+    document.title = "KServer11";
+    console.log("switching KServer11");
+  break;
+  case "KServer12":
+    currentServer.morning = KServer12.morning ;
+    currentServer.afternoon = KServer12.afternoon;
+    document.title = "KServer12";
+    console.log("switching KServer12");
+  break;
+  case "KServer13":
+    currentServer.morning = KServer13.morning ;
+    currentServer.afternoon = KServer13.afternoon;
+    document.title = "KServer13";
+    console.log("switching KServer13");
+  break;
+  case "KServer14":
+    currentServer.morning = KServer14.morning ;
+    currentServer.afternoon = KServer14.afternoon;
+    document.title = "KServer14";
+    console.log("switching KServer14");
+  break;
+  case "KServer15":
+    currentServer.morning = KServer15.morning ;
+    currentServer.afternoon = KServer15.afternoon;
+    document.title = "KServer15";
+    console.log("switching KServer15");
+  break;
+  case "win7ssd":
+    currentServer.morning = win7ssd.morning ;
+    currentServer.afternoon = win7ssd.afternoon;
+    document.title = "win7ssd";
+    console.log("switching win7ssd");
+  break;
+  case "my5600x":
+    currentServer.morning = my5600x.morning ;
+    currentServer.afternoon = my5600x.afternoon;
+    document.title = "my5600x";
+    console.log("switching my5600x");
+  break;
+    
+  default:
+  currentServer.morning = 1600;
+  currentServer.afternoon = 1000;
+  console.log("switching to Default");
+}
+
+
+if (morningParam !== null && morningParam !== "" && morningParam !== "0"){
+   offsetMilliSecondsValue = Number(morningParam) + Number(offset); // Morning from Param 
+   console.log("morningParam is NOT empty");
+   console.log("morningParam: " + morningParam + " offset: " + offset);
+}else{
+   offsetMilliSecondsValue = Number(currentServer.morning) + Number(offset); // Morning default
+   console.log("morningParam is empty");
+   console.log("morningParam: " + currentServer.morning + " offset: " + offset);
+}
+
+if (afternoonParam !== null && afternoonParam !== "" && afternoonParam !== "0"){
+   afternoon_offsetMilliSecondsValue =Number(afternoonParam) + Number(offset); // afternoon from Param
+   console.log("afternoonParam is NOT Empty");
+   console.log("afternoonParam: " + afternoonParam + " offset: " + offset);
+}
+else{
+   afternoon_offsetMilliSecondsValue = Number(currentServer.afternoon) + Number(offset); // afternoon default
+   console.log("afternoonParam is Empty");
+   console.log("afternoonParam: " + currentServer.afternoon + " offset: " + offset);
+}
+
+console.log("offsetMilliSecondsValue: " + offsetMilliSecondsValue ); 
+
+  // Get today's date and time 
+  var now = new Date();
+  var setHour = 0;
+  var setMinute =0;
+  var myInputTime = new Date();
+
+  if (now.getTime() > morningSession.getTime() && now.getTime() <= afternoonSession.getTime() )    {
+    myInputTime = afternoonSession - afternoon_offsetMilliSecondsValue;
+    //console.log("myInputTime is : " + myInputTime);
+  }
+  else if (now.getTime() > afternoonSession && now.getTime() <= midnight) 
+      {
+      myInputTime = morningSession - offsetMilliSecondsValue + (1000 * 60 * 60 * 24);      
+      console.log(myInputTime);
+      //alert("midnight");
+      }
+  else  {myInputTime = morningSession - offsetMilliSecondsValue;}
+  
+ 
+
+// Set the date we're counting down to
+//var countDownDate = new Date(myInputTime).getTime()
+  var countDownDate = myInputTime;
+// Find the subtractMilliSecondsValue between now and the count down date
+  var subtractMilliSecondsValue = countDownDate - now.getTime();
+  
+document.getElementsByTagName("body")[0].innerHTML =  "<iframe id=\"testFrame\" src=\"" + ksc_URL + "\" style=\"position: absolute; top:0; left:0; right:0; bottom:0; width:100%; height:100%;\"> <\/iframe>";
+
+reloadTimer = setTimeout( function(){document.getElementById("testFrame").src=document.getElementById("testFrame").src }, subtractMilliSecondsValue) ;
+
+
+// Update the count down every 1/2 second
+var x = setInterval(function() {
+
+   // Get today's date and time
+   var nowUpdated = new Date().getTime();
+    
+    // Find the subtractMilliSecondsValue between now and the count down date
+    var distance = countDownDate - nowUpdated;
+
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  var milliseconds = distance % 1000;
+    
+  // Output the result in an element with id="Canvas"
+  document.getElementById("Canvas").innerHTML = days + "d " + hours + "h "
+  + minutes + "m " + seconds + "s " ;
+  //+ milliseconds +"ms"
+    
+  // If the count down is over, write some text 
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("Canvas").innerHTML = "EXPIRED";
+  }
+}, 500);
+</script>
+
 
 <p id="triggerDate"></p>
 
@@ -348,5 +330,6 @@
 
 
 
+<a target="_blank" href="https://www.tutorialspoint.com/how-do-i-trigger-a-function-when-the-time-reaches-a-specific-time-in-javascript">Reference for time</a>
 </body>
 </html>
