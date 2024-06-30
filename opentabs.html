@@ -125,6 +125,29 @@ const currentServer = {morning: 1550, afternoon: 575};
 // Thursday morning (8T all) 5 tabs repeat 550 575 NOT good
 // Friday morning (8T all) 5 tabs repeat  575
 // 
+const KServer01 = {morning: 300, afternoon: 300}; //1850/1750  575/625/675
+const KServer02 = {morning: 300, afternoon: 325};
+const KServer03 = {morning: 300, afternoon: 350}; //1550 Morning thursday GOOD
+const KServer04 = {morning: 300, afternoon: 375}; // 400 GOOD 1450 Morning MON THUR no reload GOOD
+const KServer05 = {morning: 2300, afternoon: 300}; 
+const KServer06 = {morning: 2500, afternoon: 325}; 
+const KServer07 = {morning: 2700, afternoon: 350};
+const KServer08 = {morning: 2900, afternoon: 375}; //1050 Morning thursday ok
+const KServer09 = {morning: 300, afternoon: 300};
+const KServer10 = {morning: 350, afternoon: 325}; 
+const KServer11 = {morning: 400, afternoon: 350};// 550 575 675 GOOD
+const KServer12 = {morning: 450, afternoon: 375};
+const KServer13 = {morning: 500, afternoon: 375}; // Afternoon 2860 Single for Kserver13 works good, 1S 1700
+const KServer14 = {morning: 550, afternoon: 375}; // Thursday Afternoon 675 single
+
+const KServer15 = {morning: 550, afternoon: 550}; 
+
+const brave = {morning: 2800, afternoon: 300}; 
+const edge = {morning: 2800, afternoon: 300}; // Afternoon 2400 no good 675 5 tabs repeats worked
+const my5600x = {morning: 2800, afternoon: 300}; // 2800 single okay 2540 old value, Monday morning/Afternoon 650 single not working
+
+const win7ssd = {morning: 2150, afternoon: 1850}; //2150 1000
+
 // const KServer01 = {morning: 2575, afternoon: 550}; //1850/1750  575/625/675
 // const KServer02 = {morning: 2675, afternoon: 550};
 // const KServer03 = {morning: 2775, afternoon: 550}; //1550 Morning thursday GOOD
@@ -140,29 +163,10 @@ const currentServer = {morning: 1550, afternoon: 575};
 // const KServer13 = {morning: 2875, afternoon: 550}; // Afternoon 2860 Single for Kserver13 works good, 1S 1700
 // const KServer14 = {morning: 2925, afternoon: 550}; // Thursday Afternoon 675 single
 
-const KServer01 = {morning: 300, afternoon: 300}; //1850/1750  575/625/675
-const KServer02 = {morning: 300, afternoon: 325};
-const KServer03 = {morning: 300, afternoon: 350}; //1550 Morning thursday GOOD
-const KServer04 = {morning: 300, afternoon: 375}; // 400 GOOD 1450 Morning MON THUR no reload GOOD
-const KServer05 = {morning: 2300, afternoon: 400}; 
-const KServer06 = {morning: 2500, afternoon: 425}; 
-const KServer07 = {morning: 2700, afternoon: 450};
-const KServer08 = {morning: 2900, afternoon: 475}; //1050 Morning thursday ok
-const KServer09 = {morning: 300, afternoon: 500};
-const KServer10 = {morning: 350, afternoon: 325}; 
-const KServer11 = {morning: 400, afternoon: 550};// 550 575 675 GOOD
-const KServer12 = {morning: 450, afternoon: 575};
-const KServer13 = {morning: 500, afternoon: 600}; // Afternoon 2860 Single for Kserver13 works good, 1S 1700
-const KServer14 = {morning: 550, afternoon: 550}; // Thursday Afternoon 675 single
-
-
-const KServer15 = {morning: 550, afternoon: 550}; 
-
-const win7ssd = {morning: 2150, afternoon: 1850}; //2150 1000
-
-const brave = {morning: 2800, afternoon: 2575}; 
-const edge = {morning: 2800, afternoon: 2675}; // Afternoon 2400 no good 675 5 tabs repeats worked
-const my5600x = {morning: 2800, afternoon: 575}; // 2800 single okay 2540 old value, Monday morning/Afternoon 650 single not working
+// const brave = {morning: 2800, afternoon: 2575}; 
+// const edge = {morning: 2800, afternoon: 2675}; // Afternoon 2400 no good 675 5 tabs repeats worked
+// const my5600x = {morning: 2800, afternoon: 575}; // 2800 single okay 2540 old value, Monday morning/Afternoon 650 single not working
+//const win7ssd = {morning: 2150, afternoon: 1850}; //2150 1000
 
 switch(serverParam) {
   case "KServer01":
