@@ -82,7 +82,9 @@ console.log('offset: ' + offset);
 
 
 // Declare constants 
-const ksc_URL = "https://kscgolf2.noq.com.hk/?noq_c=kscgolf&noq_r=https%3A%2F%2Fbooking.kscgolf.org.hk%2FwaitingRoom%3F";
+//const ksc_URL = "https://kscgolf2.noq.com.hk/?noq_c=kscgolf&noq_r=https%3A%2F%2Fbooking.kscgolf.org.hk%2FwaitingRoom%3F";
+const ksc_URL = "https://booking.kscgolf.org.hk/waitingRoom";
+
 //7 numbers specify [year], [month], [day], [hour], [minute], [second], and [millisecond] (in that order)
 const today = new Date();
 const morningSession = new Date(today.getFullYear(),today.getMonth(),today.getDate(),9,30,0,0);
@@ -130,6 +132,7 @@ const currentServer = {morning: 1550, afternoon: 575};
 // Monday Morning server14 12T 375 1 tab no repeat
 // TUE  Morning 8T 400 1 tab no repeat NOT working
 // Thurday Morning 1 tab 8T repeat 2325 only on Server01
+// Sat 400 16T 2 tabs no repeat FAILED completely, 2400 2 tabs repeat once better
 const KServer01 = {morning: 2380, afternoon: 325}; //1850/1750  575/625/675
 const KServer02 = {morning: 2400, afternoon: 325};
 const KServer03 = {morning: 2425, afternoon: 325}; //1550 Morning thursday GOOD
@@ -150,7 +153,7 @@ const brave = {morning: 425, afternoon: 350}; //Friday Morning fast repeat 5 tab
 const edge = {morning: 425, afternoon: 350}; // Afternoon 2400 no good 675 5 tabs repeats worked
 const my5600x = {morning: 425, afternoon: 350}; // 2800 single okay 2540 old value, Monday morning/Afternoon 650 single not working
 
-const win7ssd = {morning: 2150, afternoon: 350}; //2150 1000
+const win7ssd = {morning: 2150, afternoon: 2150}; //2150 350
 
 // const KServer01 = {morning: 2575, afternoon: 550}; //1850/1750  575/625/675
 // const KServer02 = {morning: 2675, afternoon: 550};
