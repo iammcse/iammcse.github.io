@@ -97,7 +97,8 @@ var offsetMilliSecondsValue = "0" ;
 var afternoon_offsetMilliSecondsValue = "0" ;
 
 const currentServer = {morning: 1550, afternoon: 575};
-// Friday - 8T 1 brower "waitingRoom" 5 tabs - Server10,11 2750 2825 WORKED
+// Friday Morning - 8T 1 brower "waitingRoom" 5 tabs - Server10,11 2750 2825 WORKED
+// sat Morning - 8T 1 brower "waitingRoom" 5 tabs, 2750, 2800, 2825 not working
 const KServer01 = {morning: 2800, afternoon: 350}; // Firday 2775 WORST 
 const KServer02 = {morning: 2800, afternoon: 350}; // Firday 2825 WORST 
 const KServer03 = {morning: 2800, afternoon: 350}; // Firday 2800 NOT so bad
@@ -106,7 +107,7 @@ const KServer05 = {morning: 2800, afternoon: 350}; // Firday 2850 Worst
 const KServer06 = {morning: 2800, afternoon: 350}; // Firday 2850 bad
 const KServer07 = {morning: 2800, afternoon: 350}; // Firday 2750 WORST 
 const KServer08 = {morning: 2800, afternoon: 350}; // Firday 2750 WORST 
-const KServer09 = {morning: 2800, afternoon: 350}; // Firday 2750 bad
+const KServer09 = {morning: 2800, afternoon: 350}; // Firday 2750 bad WED 2800
 const KServer10 = {morning: 2750, afternoon: 350}; // Firday 2750 WON
 const KServer11 = {morning: 2825, afternoon: 350}; // Firday 2825 WON
 const KServer12 = {morning: 2825, afternoon: 350}; // Firday 2825 NOT so bad
@@ -116,7 +117,7 @@ const KServer15 = {morning: 605, afternoon: 350};
 
 const brave = {morning: 2750, afternoon: 350}; //Friday Morning fast repeat 5 tabs 425 Working 
 const edge = {morning: 2750, afternoon: 350}; // Afternoon 2400 no good 675 5 tabs repeats worked
-const my5600x = {morning: 2750, afternoon: 350}; // 2800 single okay 2540 old value, Monday morning/Afternoon 650 single not working
+const my5600x = {morning: 2750, afternoon: 350}; // SAT afternoon 5 tabs 350 worked, 2800 single okay 2540 old value, Monday morning/Afternoon 650 single not working
 
 const win7ssd = {morning: 2150, afternoon: 2150}; //2150 350
 
@@ -414,7 +415,7 @@ var x = setInterval(function() {
     clearInterval(x);
     document.getElementById("Canvas").innerHTML = "EXPIRED";
   }
-}, 500);
+}, 100);
 </script>
 
 
