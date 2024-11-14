@@ -133,6 +133,7 @@ const KServer12 = {morning: 1200, afternoon: 1850}; // Firday 2925 SINGLE WORKED
 const KServer13 = {morning: 1000, afternoon: 1850}; // Friday 2800 OK, SAT 2900 1 browser twice worked 
 const KServer14 = {morning: 800, afternoon: 1850}; // Firday 2800 bad, SUN 2925 Double twice worked 
 const KServer15 = {morning: 600, afternoon: 1850}; // Firday 2925 SINGLE WORKED, SAT 2925 2 browser twice worked
+const KServer16 = {morning: 400, afternoon: 1850};
 
 // 2825 refresh 0.15s 1 browser 5 tabs worked for brave & edge (shared IP)
 // 5600x a bit behind without proxy
@@ -339,6 +340,12 @@ switch(serverParam) {
     currentServer.afternoon = KServer15.afternoon;
     document.title = "KS15";
     console.log("switching KServer15");
+  break;
+  case "KServer16":
+    currentServer.morning = KServer15.morning ;
+    currentServer.afternoon = KServer15.afternoon;
+    document.title = "KS16";
+    console.log("switching KServer16");
   break;
   case "win7ssd":
     currentServer.morning = win7ssd.morning ;
