@@ -342,8 +342,8 @@ switch(serverParam) {
     console.log("switching KServer15");
   break;
   case "KServer16":
-    currentServer.morning = KServer15.morning ;
-    currentServer.afternoon = KServer15.afternoon;
+    currentServer.morning = KServer16.morning ;
+    currentServer.afternoon = KServer16.afternoon;
     document.title = "KS16";
     console.log("switching KServer16");
   break;
@@ -370,6 +370,18 @@ switch(serverParam) {
     currentServer.afternoon = brave.afternoon;
     document.title = "brave";
     console.log("switching brave");
+  break;
+  case "AllBraveKservers":
+    currentServer.morning = AllBraveKservers.morning ;
+    currentServer.afternoon = AllBraveKservers.afternoon;
+    document.title = "AllBraveKservers";
+    console.log("switching AllBraveKservers");
+  break;
+  case "Wildcard":
+    currentServer.morning = Wildcard.morning ;
+    currentServer.afternoon = Wildcard.afternoon;
+    document.title = "Wildcard";
+    console.log("switching Wildcard");
   break;
   default:
   currentServer.morning = 2950;
