@@ -80,7 +80,6 @@ if (offset == null || offset == "" ){
 }
 console.log('offset: ' + offset);
 
-
 // Declare constants 
 const ksc_URL = "https://kscgolf2.noq.com.hk/?noq_c=kscgolf&noq_r=https%3A%2F%2Fbooking.kscgolf.org.hk%2FwaitingRoom%3F";
 //https://kscgolf2.noq.com.hk/?noq_c=kscgolf&noq_r=https%3A%2F%2Fbooking.kscgolf.org.hk%2FwaitingRoom
@@ -97,68 +96,24 @@ var offsetMilliSecondsValue = "0" ;
 var afternoon_offsetMilliSecondsValue = "0" ;
 
 const currentServer = {morning: 1550, afternoon: 575};
-// Friday Morning - 8T 1 brower "waitingRoom" 5 tabs - Server10,11 2750 2825 WORKED
-// sat Morning - 8T 1 brower "waitingRoom" 5 tabs, 2750, 2800, 2825 not working
-// WED afternoon 8T/16T repeat/non 350 NOT good
-// Thursday morning twin browsers 2800 repeat 5tabs ok2 5 6 7 
-// Thursday afternoon twin browsers 550 repeat 5tabs browser 12 
-// const KServer01 = {morning: 2875, afternoon: 325}; // Firday 2775 WORST, SAT 2875 2 browser twice OK, MON-TUE single browser 2875 worked
-// const KServer02 = {morning: 2925, afternoon: 325}; // Firday 2825 WORST 
-// const KServer03 = {morning: 2875, afternoon: 375}; // Firday 2925 SINGLE, SAT 2925 2 browser twice OK
-// const KServer04 = {morning: 2925, afternoon: 325}; // Friday 2875 SINGLE WORKED
-// const KServer05 = {morning: 2875, afternoon: 375}; // Firday 2850 Worst, SAT 2900 1 browser twice worked
-// const KServer06 = {morning: 2925, afternoon: 375}; // Firday 2850 bad, SAT 2825 1 browser twice worked
-// const KServer07 = {morning: 2875, afternoon: 375}; // Firday 2750 WORST 
-// const KServer08 = {morning: 2925, afternoon: 325}; // Firday 2750 WORST, SAT 2775 twice worked
-// const KServer09 = {morning: 2875, afternoon: 375}; // Firday 2750 bad WED 2800
-// const KServer10 = {morning: 2925, afternoon: 375}; // Firday 2750 WON, MON-TUE single browser 2875 worked 
-// const KServer11 = {morning: 2875, afternoon: 375}; // Firday 2825 WON, SAT 2900 2 browser twice OK 
-// const KServer12 = {morning: 2925, afternoon: 325}; // Firday 2925 SINGLE WORKED
-// const KServer13 = {morning: 2875, afternoon: 350}; // Friday 2800 OK, SAT 2900 1 browser twice worked 
-// const KServer14 = {morning: 2925, afternoon: 325}; // Firday 2800 bad, SUN 2925 Double twice worked 
-// const KServer15 = {morning: 2875, afternoon: 375}; // Firday 2925 SINGLE WORKED, SAT 2925 2 browser twice worked
-// afternoon: 1850
 
-// const KServer01 = {morning: 2800, afternoon: 1660}; // 1850 2800 worked Firday 2775 WORST, SAT 2875 2 browser twice OK, MON-TUE single browser 2875 worked
-// const KServer02 = {morning: 2950, afternoon: 1680}; // 1850 Firday 2825 WORST 
-// const KServer03 = {morning: 2850, afternoon: 1700}; // Firday 2925 SINGLE, SAT 2925 2 browser twice OK
-// const KServer04 = {morning: 3000, afternoon: 1720}; // Friday 2875 SINGLE WORKED
-// const KServer05 = {morning: 2850, afternoon: 1740}; // Firday 2850 Worst, SAT 2900 1 browser twice worked
-// const KServer06 = {morning: 3100, afternoon: 1760}; // Firday 2850 bad, SAT 2825 1 browser twice worked
-// const KServer07 = {morning: 3000, afternoon: 1780}; // Firday 2750 WORST 
-// const KServer08 = {morning: 3100, afternoon: 1800}; // Firday 2750 WORST, SAT 2775 twice worked
-// const KServer09 = {morning: 3100, afternoon: 1820}; // 1800 Firday 2750 bad WED 2800
-// const KServer10 = {morning: 3050, afternoon: 1840}; // 1800 Firday 2750 WON, MON-TUE single browser 2875 worked 
-// const KServer11 = {morning: 3000, afternoon: 1860}; // 1800 Firday 2825 WON, SAT 2900 2 browser twice OK 
-// const KServer12 = {morning: 3100, afternoon: 1880}; // Firday 2925 SINGLE WORKED
-// const KServer13 = {morning: 3100, afternoon: 1990}; // 1800  Friday 2800 OK, SAT 2900 1 browser twice worked 
-// const KServer14 = {morning: 3100, afternoon: 1920}; // Firday 2800 bad, SUN 2925 Double twice worked 
-// const KServer15 = {morning: 2950, afternoon: 1940}; // Firday 2925 SINGLE WORKED, SAT 2925 2 browser twice worked
-// const KServer16 = {morning: 3200, afternoon: 1960};
+const KServer01 = {morning: 2750, afternoon: 700}; // 1000,720 1000:72 720:15 700:PASS (sun 2800, mon 1660) (1850)  
+const KServer02 = {morning: 600, afternoon: 700}; // 960:71 720:1 700:21 () (sun 1850)
+const KServer03 = {morning: 2750, afternoon: 700}; // 920:70 720:17 700 PASS
+const KServer04 = {morning: 600, afternoon: 720}; // 880,720 63 720:PASS 720:3
+const KServer05 = {morning: 2750, afternoon: 840}; // 840,840 PASS 840:21 840:3 [360-840]
+const KServer06 = {morning: 600, afternoon: 800}; // 800,800 PASS 800:3 800:17 (mon 1760) (wed 800)
+const KServer07 = {morning: 2750, afternoon: 760}; // 760,760 760:PASS 760:32 () (wed 760)
+const KServer08 = {morning: 600, afternoon: 720}; // 720,720 720:1 720:31 720:PASS () (wed 720)
+const KServer09 = {morning: 2750, afternoon: 680}; // 680,680 unknown 680:PASS  (mon 1820) (sun 1850)
+const KServer10 = {morning: 600, afternoon: 760}; // 640,760 PASS PASS () (sun 1800)
+const KServer11 = {morning: 2750, afternoon: 600}; // 600,600 600:PASS 600:PASS () (sun 1800)
+const KServer12 = {morning: 600, afternoon: 560}; // 560,560 560:23 560:PASS 560:4 () (sun1200)
+const KServer13 = {morning: 2750, afternoon: 800}; // 520,760 520:3 760:22 800:PASS () (sun 1800)
+const KServer14 = {morning: 600, afternoon: 800}; // 480,760 480:39 760:26 800:34
+const KServer15 = {morning: 2750, afternoon: 760}; // 440,760 440:20 760:PASS 760:10  () (sun 1500)
+const KServer16 = {morning: 600, afternoon: 800}; // 400,760 400:41 760:16 800:57 (mon 1960)
 
-//400 - 1000
-
-const KServer01 = {morning: 2750, afternoon: 700}; // 1000,720 72up15 (sun 2800, mon 1660) (1850)  
-const KServer02 = {morning: 600, afternoon: 700}; // 960,720 71up1  () (sun 1850)
-const KServer03 = {morning: 2750, afternoon: 700}; // 920,720 70up17 
-const KServer04 = {morning: 600, afternoon: 720}; // 880,720 63PASS 
-const KServer05 = {morning: 2750, afternoon: 840}; // 840,840 0DN21 680 [360-840]
-const KServer06 = {morning: 600, afternoon: 800}; // 800,800 0DN3 (mon 1760) (wed 800)
-const KServer07 = {morning: 2750, afternoon: 760}; // 760,760 0DN32 () (wed 760)
-const KServer08 = {morning: 600, afternoon: 720}; // 720,720 61up31 () (wed 720)
-const KServer09 = {morning: 2750, afternoon: 680}; // 680,680 unknown (mon 1820) (sun 1850)
-const KServer10 = {morning: 600, afternoon: 760}; // 640,760 PASS () (sun 1800)
-const KServer11 = {morning: 2750, afternoon: 600}; // 600,600 PASS () (sun 1800)
-const KServer12 = {morning: 600, afternoon: 560}; // 560,560 23PASS () (sun1200)
-const KServer13 = {morning: 2750, afternoon: 800}; // 520,760 3DN22 () (sun 1800)
-const KServer14 = {morning: 600, afternoon: 800}; // 480,760 39up26 
-const KServer15 = {morning: 2750, afternoon: 760}; // 440,760 20PASS   () (sun 1500)
-const KServer16 = {morning: 600, afternoon: 800}; // 400,760 41up16 (mon 1960)
-
-
-
-// 2825 refresh 0.15s 1 browser 5 tabs worked for brave & edge (shared IP)
-// 5600x a bit behind without proxy
 const brave = {morning: 2250, afternoon: 1800}; // 1050 Friday Morning fast repeat 5 tabs 425 Working 
 const edge = {morning: 2150, afternoon: 1800}; // 1050 Afternoon 2400 no good 675 5 tabs repeats worked
 const my5600x = {morning: 2050, afternoon: 1800}; // 1050 SAT afternoon 5 tabs 350 worked, 2800 single okay 2540 old value, Monday morning/Afternoon 650 single not working
@@ -167,110 +122,6 @@ const Wildcard = {morning: 600, afternoon: 360}; //1800
 
 //const AllBraveKservers = {morning: 3000, afternoon: 1800}; 
 const AllBraveKservers = {morning: 2750, afternoon: 1800}; // 1800
-
-// const KServer01 = {morning: 2875, afternoon: 325}; // Firday 2775 WORST, SAT 2875 2 browser twice OK, MON-TUE single browser 2875 worked
-// const KServer02 = {morning: 2875, afternoon: 325}; // Firday 2825 WORST 
-// const KServer03 = {morning: 2925, afternoon: 375}; // Firday 2925 SINGLE, SAT 2925 2 browser twice OK
-// const KServer04 = {morning: 2875, afternoon: 325}; // Friday 2875 SINGLE WORKED
-// const KServer05 = {morning: 2900, afternoon: 375}; // Firday 2850 Worst, SAT 2900 1 browser twice worked
-// const KServer06 = {morning: 2825, afternoon: 375}; // Firday 2850 bad, SAT 2825 1 browser twice worked
-// const KServer07 = {morning: 2925, afternoon: 375}; // Firday 2750 WORST 
-// const KServer08 = {morning: 2775, afternoon: 325}; // Firday 2750 WORST, SAT 2775 twice worked
-// const KServer09 = {morning: 2875, afternoon: 375}; // Firday 2750 bad WED 2800
-// const KServer10 = {morning: 2875, afternoon: 375}; // Firday 2750 WON, MON-TUE single browser 2875 worked 
-// const KServer11 = {morning: 2900, afternoon: 375}; // Firday 2825 WON, SAT 2900 2 browser twice OK 
-// const KServer12 = {morning: 2925, afternoon: 325}; // Firday 2925 SINGLE WORKED
-// const KServer13 = {morning: 2900, afternoon: 350}; // Friday 2800 OK, SAT 2900 1 browser twice worked 
-// const KServer14 = {morning: 2925, afternoon: 325}; // Firday 2800 bad, SUN 2925 Double twice worked 
-// const KServer15 = {morning: 2925, afternoon: 375}; // Firday 2925 SINGLE WORKED, SAT 2925 2 browser twice worked
-
-
-//575/1550 575 
-//1650 once sunday okay
-// 1950 1850 2950 2850
-// 2950 2925 2900 2875
-//Afternoon 2850 Double seems better
-// Tuesday Morning single brower 2925 works good 
-// Thursday Morning double brower 2925 2950 works good 
-// Friday  Morning single brower 2675-2925 works good 
-// Friday  Morning double  brower 2925 2950 works good 
-// Sunday Afternoon, single (2830-2860) double (2870)
-// Monday Morning, double 2940-2960 not doing well
-// Tuesday Morning single brower 2925 not working .. so werid, 2960 worked well  
-// Wed Afternoon single 475 (clipping, can try again) 
-// Thursday Afternoon SINGLE 2 TABS 675  works good 
-// Sunday morning 2875 single 16T not working
-// Sunday Afternoon 675 single 8T ok
-// Monday Morning,single 8T 2875 ok, 675-875 8T NOT working
-// Tuesday Morning single brower 8t/12t 2800 works good 
-// Tuesday Afternoon single brower 8t/12t 675 NOT good 
-// Wed Morning 2800 and 800 single 8t/12t not working well, double browser worked 1 out of 2
-// Wed Afternoon double 8T 2800 worked better
-// Thursday Afternoon single brower 8t/12t 675 single not working well, double a little better
-// Friday morning 12T 2800 single and double not working
-// Sunday 2750 - 2925 16T single double not working well, my5600x 2800 double worked well
-// Holiday Monday 2875 12T relatively better 
-// Tuesday Morning (8T all) 2 tabs no repeat > only server2 800 win. 5 tabs repeat 550,525,600 server11,12,10  ok, Worst is 700 2 tabs
-// Tuesday Afternoon (8T all) 2 tabs no repeat > only server6 550 win. 5 tabs no repeat 550 2 tabs 575 no repeat 5 tabs WORKED
-// Wednesday Afternoon (8T all) 2 tabs no repeat > 550 575 so so
-// Thursday morning (8T all) 5 tabs repeat 550 575 NOT good
-// Friday morning (8T all) 5 tabs repeat  575
-// Sat Afternoon 8T NO repeat 1 tab 300
-// Sunday Morning 16T NO repeat 1 tab 400.  Afternoon 16T NO repeat 1 tab 325,375 
-// Sunday  Afternoon 8T NO repeat 1 tab 400. Server 2,4,6,8 325 375 5 tab no repeat
-// Monday Morning server14 12T 375 1 tab no repeat
-// TUE  Morning 8T 400 1 tab no repeat NOT working
-// Thurday Morning 1 tab 8T repeat 2325 only on Server01
-// Sat morning 400  16T 2 tabs no repeat FAILED completely, 2400 2 tabs repeat once better
-// Sun morning 2575, 2800, 2925, 2950, 16T 5 Tabs one browser, only Server14 2925 better
-// Sun AFTERNOON 16T 350 repeat OR 325 NO repeate worked well  "waitingRoom"
-// Monday Morning 16T 275 325 350 425 475 ONE TAB both REPEAT & non-repeat  NOT WORKING "waitingRoom"
-// Monday AFTERNOON 325 repeat 350 non-repeat ONE TAB NOT WORKING "waitingRoom"
-// Tuesday Morning (16T) 1 tab repeat > 225-350 server3-6 550-750 server10-14 also flash page, need to investigate, maybe try 8T. 750 got in though.
-// 325 350
-
-// const KServer01 = {morning: 2575, afternoon: 550}; //1850/1750  575/625/675
-// const KServer02 = {morning: 2675, afternoon: 550};
-// const KServer03 = {morning: 2775, afternoon: 550}; //1550 Morning thursday GOOD
-// const KServer04 = {morning: 2885, afternoon: 550}; // 400 GOOD 1450 Morning MON THUR no reload GOOD
-// const KServer05 = {morning: 2575, afternoon: 550}; 
-// const KServer06 = {morning: 2675, afternoon: 550}; 
-// const KServer07 = {morning: 2775, afternoon: 550};
-// const KServer08 = {morning: 2885, afternoon: 550}; //1050 Morning thursday ok
-// const KServer09 = {morning: 2575, afternoon: 550};
-// const KServer10 = {morning: 2675, afternoon: 550}; 
-// const KServer11 = {morning: 2875, afternoon: 550};// 550 575 675 GOOD
-// const KServer12 = {morning: 2875, afternoon: 550};
-// const KServer13 = {morning: 2875, afternoon: 550}; // Afternoon 2860 Single for Kserver13 works good, 1S 1700
-// const KServer14 = {morning: 2925, afternoon: 550}; // Thursday Afternoon 675 single
-
-// const brave = {morning: 2800, afternoon: 2575}; 
-// const edge = {morning: 2800, afternoon: 2675}; // Afternoon 2400 no good 675 5 tabs repeats worked
-// const my5600x = {morning: 2800, afternoon: 575}; // 2800 single okay 2540 old value, Monday morning/Afternoon 650 single not working
-//const win7ssd = {morning: 2150, afternoon: 1850}; //2150 1000
-
-
-// const KServer01 = {morning: 775, afternoon: 350}; //1850/1750  575/625/675
-// const KServer02 = {morning: 825, afternoon: 350};
-// const KServer03 = {morning: 800, afternoon: 350}; //1550 Morning thursday GOOD
-// const KServer04 = {morning: 800, afternoon: 350}; // 400 GOOD 1450 Morning MON THUR no reload GOOD
-// const KServer05 = {morning: 850, afternoon: 350}; 
-// const KServer06 = {morning: 850, afternoon: 350}; 
-// const KServer07 = {morning: 750, afternoon: 350};
-// const KServer08 = {morning: 750, afternoon: 350}; //1050 Morning thursday ok
-// const KServer09 = {morning: 750, afternoon: 350};
-// const KServer10 = {morning: 750, afternoon: 350}; 
-// const KServer11 = {morning: 825, afternoon: 350};// 550 575 675 GOOD
-// const KServer12 = {morning: 825, afternoon: 350};
-// const KServer13 = {morning: 800, afternoon: 350}; // Afternoon 2860 Single for Kserver13 works good, 1S 1700
-// const KServer14 = {morning: 800, afternoon: 350}; // Thursday Afternoon 675 single
-// const KServer15 = {morning: 605, afternoon: 350}; 
-
-// const brave = {morning: 425, afternoon: 350}; //Friday Morning fast repeat 5 tabs 425 Working 
-// const edge = {morning: 425, afternoon: 350}; // Afternoon 2400 no good 675 5 tabs repeats worked
-// const my5600x = {morning: 425, afternoon: 350}; // 2800 single okay 2540 old value, Monday morning/Afternoon 650 single not working
-
-// const win7ssd = {morning: 2150, afternoon: 2150}; //2150 350
 
 switch(serverParam) {
   case "KServer01":
