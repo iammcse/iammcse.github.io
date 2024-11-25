@@ -99,22 +99,22 @@ const currentServer = {morning: 1550, afternoon: 575};
 
 // Estimated for afernoon best at 520ms - 600ms (believe latest) [happened 360-840]
 // 360 -480/280
-const KServer01 = {morning: 500, afternoon: 700}; // (Mon500:50) 1000:72 720:15 700:PASS 700:PASS  (sun 2800, mon 1660) (1850)  
-const KServer02 = {morning: 560, afternoon: 760}; // (Mon560:70) 960:71 720:1 700:21 740:6 () (sun 1850)
-const KServer03 = {morning: 500, afternoon: 700}; // (Mon500:32) 920:70 720:17 700:PASS 700:PASS
-const KServer04 = {morning: 500, afternoon: 700}; // (Mon500:74) 880:63 720:PASS 720:3 700:PASS
-const KServer05 = {morning: 640, afternoon: 400}; // (Mon640:52) 800:PASS 840:21 840:3 840:missed
-const KServer06 = {morning: 600, afternoon: 400}; // (Mon600:61) 800:PASS 800:3 800:17 800:missed (mon 1760) (wed 800)
-const KServer07 = {morning: 560, afternoon: 560}; // (Mon560:63) 760:PASS 760:32 760:missed () (wed 760)
-const KServer08 = {morning: 520, afternoon: 720}; // (Mon520:49) 720:1 720:31 720:PASS 720:mised () (wed 720)
-const KServer09 = {morning: 480, afternoon: 680}; // (Mon480:PASS) 680,680 unknown 680:PASS 680:PASS (mon 1820) (sun 1850)
-const KServer10 = {morning: 560, afternoon: 760}; // (Mon560:123) 760:PASS 760:PASS 760:PASS () (sun 1800)
-const KServer11 = {morning: 400, afternoon: 600}; // (Mon400:43) 600,600 600:PASS 600:PASS 600:1 () (sun 1800)
-const KServer12 = {morning: 360, afternoon: 560}; // (Mon360:16) 560:23 560:PASS 560:4 560:PASS () (sun1200)
-const KServer13 = {morning: 600, afternoon: 360}; // (Mon600:60) 520:3 760:22 800:PASS 780:17 () (sun 1800)
-const KServer14 = {morning: 520, afternoon: 720}; // (Mon520:110) 480:39 760:26 800:34 720:PASS
-const KServer15 = {morning: 580, afternoon: 560}; // (Mon500:80) 440:20 760:PASS 760:10 780:28 () (sun 1500)
-const KServer16 = {morning: 540, afternoon: 740}; // (Mon540:21) 400:41 760:16 800:57 740:PASS (mon 1960)
+const KServer01 = {morning: 380, afternoon: 700}; // (Mon500:50 Tue500:) 1000:72 720:15 700:PASS 700:PASS 700:PASS   (sun 2800, mon 1660) (1850)  
+const KServer02 = {morning: 380, afternoon: 760}; // (Mon560:70 Tue560:) 960:71 720:1 700:21 740:6 760:26  () (sun 1850)
+const KServer03 = {morning: 380, afternoon: 700}; // (Mon500:32 Tue500:) 920:70 720:17 700:PASS 700:PASS 700:51 
+const KServer04 = {morning: 380, afternoon: 700}; // (Mon500:74 Tue500:) 880:63 720:PASS 720:3 700:PASS 700:27 
+const KServer05 = {morning: 400, afternoon: 400}; // (Mon640:52 Tue640:) 800:PASS 840:21 840:3 840:missed 400:5 
+const KServer06 = {morning: 400, afternoon: 400}; // (Mon600:61 Tue600:) 800:PASS 800:3 800:17 800:missed 400:8  (mon 1760) (wed 800)
+const KServer07 = {morning: 400, afternoon: 560}; // (Mon560:63 Tue560:) 760:PASS 760:32 760:missed 560:41  () (wed 760)
+const KServer08 = {morning: 400, afternoon: 720}; // (Mon520:49 Tue520:) 720:1 720:31 720:PASS 720:mised 720:31  () (wed 720)
+const KServer09 = {morning: 480, afternoon: 680}; // (Mon480:PASS Tue480:) 680:PASS 680:PASS 680:23 (mon 1820) (sun 1850)
+const KServer10 = {morning: 420, afternoon: 760}; // (Mon560:123 Tue560:) 760:PASS 760:PASS 760:PASS 760:15 () (sun 1800)
+const KServer11 = {morning: 420, afternoon: 600}; // (Mon400:43 Tue400:) 600:PASS 600:PASS 600:1 600:34 () (sun 1800)
+const KServer12 = {morning: 380, afternoon: 560}; // (Mon360:16 Tue360:) 560:23 560:PASS 560:4 560:PASS 560:43 () (sun1200)
+const KServer13 = {morning: 480, afternoon: 360}; // (Mon600:60 Tue600:) 520:3 760:22 800:PASS 780:17 360:42 () (sun 1800)
+const KServer14 = {morning: 400, afternoon: 720}; // (Mon520:110 Tue520:) 480:39 760:26 800:34 720:PASS 720:56 
+const KServer15 = {morning: 400, afternoon: 560}; // (Mon500:80 Tue580:) 440:20 760:PASS 760:10 780:28 560:13 () (sun 1500)
+const KServer16 = {morning: 380, afternoon: 740}; // (Mon540:21 Tue540:) 400:41 760:16 800:57 740:PASS 740:52 (mon 1960)
 
 const brave = {morning: 2550, afternoon: 1800}; // 1050 Friday Morning fast repeat 5 tabs 425 Working 
 const edge = {morning: 2550, afternoon: 1800}; // 1050 Afternoon 2400 no good 675 5 tabs repeats worked
@@ -122,7 +122,7 @@ const my5600x = {morning: 2550, afternoon: 1800}; // 1050 SAT afternoon 5 tabs 3
 
 const win7ssd = {morning: 2950, afternoon: 1800}; // 1800 2150  SAT 2150 single NOT good. 350
 
-const Wildcard = {morning: 2750, afternoon: 560}; //760:(server 17 18 pass)(server18:17,20:33  ) 1800 
+const Wildcard = {morning: 380, afternoon: 560}; //760:(server 17 18 pass)(server18:17,20:33  ) 1800 
 
 
 //const AllBraveKservers = {morning: 3000, afternoon: 1800}; 
