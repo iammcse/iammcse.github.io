@@ -101,93 +101,36 @@ const currentServer = {morning: 1550, afternoon: 575};
 // 360 -480/280
 // (morning) Fri ... Fri afternoon checked
 
-const KServer01 = {morning: 745, afternoon: 660}; // (M500:50 T380:47 W680:67 H680:71) 1000:72 720:15 700:PASS 700:PASS 700:PASS 700:44 700:25 740:38 740:81 710:60 660:62 660:52
-const KServer02 = {morning: 745, afternoon: 660}; // (M560:70 T380:63 W640:112 H680:28) 960:71 720:1 700:21 740:6 760:26 770:62 720:PASS 820:22 740:80 700:80 660:PASS 660:67
-const KServer03 = {morning: 2745, afternoon: 690}; // (M500:32 T380:84 W620:128 H680:177) 920:70 720:17 700:PASS 700:PASS 700:51 730:28 700:42 700:41 740:80 690:PASS 690:36 690:74
-const KServer04 = {morning: 2745, afternoon: 700}; // (M500:74 T380:93 W600:118 H680:81) 880:63 720:PASS 720:3 700:PASS 700:27 730:23 720:70 820:57 740:80 680:65 660:55 660:58
-const KServer05 = {morning: 745, afternoon: 680}; // (M640:52 T400:89 W460:131 H680:100) 800:PASS 840:21 840:3 840:missed 400:5 400:13 800:52 800:14 670:5 680:41 680:50
-const KServer06 = {morning: 745, afternoon: 720}; // (M600:61 T400:53 W460:85 H680:79) 800:PASS 800:3 800:17 800:missed 400:8 400:PASS 800:85 900:27 660:66 690:48 690:57
-const KServer07 = {morning: 2745, afternoon: 660}; // (M560:63 T400:55 W460:26 H500:94) 760:PASS 760:32 760:missed 560:41 770:26 760:PASS 760:PASS 650:18 660:92 660:59
-const KServer08 = {morning: 2745, afternoon: 670}; // (M520:49 T400:60 W460:95 H690:20) 720:1 720:31 720:PASS 720:mised 720:31 740:1 740:40 840:48 640:1 660:PASS 660:PASS
-const KServer09 = {morning: 745, afternoon: 690}; // (M480:PASS T480:70 W460:76 H680:70) 680:PASS 680:PASS 680:23 700:23 800:89 800:25 630:15 660:54 660:48
-const KServer10 = {morning: 745, afternoon: 680}; // (M560:123 T420:64 W460:90 H680:68) 760:PASS 760:PASS 760:PASS 760:15 770:37 720:PASS 820:35 620:14 660:31 660:62
-const KServer11 = {morning: 2745, afternoon: 660}; // (M400:43 T420:70 W460:59 H680:132) 600:PASS 600:PASS 600:1 600:34 770:PASS 770:37 770:54 610:? 660:69 660:12
-const KServer12 = {morning: 2745, afternoon: 660}; // (M360:16 T380:58 W460:98 H680:131) 560:23 560:PASS 560:4 560:PASS 560:43 770:60 720:33 820:17 600:10 660:64 660:15
-const KServer13 = {morning: 745, afternoon: 660}; // (M600:60 T480:73 W600:167 H680:110) 520:3 760:22 800:PASS 780:17 360:42 770:5 800:39 800:34 590:67 660:56 660:PASS
-const KServer14 = {morning: 745, afternoon: 660}; // (M520:110 T400:86 W620:79 H680:42) 480:39 760:26 800:34 720:PASS 720:56 770:36 720:PASS 820:55 580:62 660:101 660:60
-const KServer15 = {morning: 745, afternoon: 690}; // (M500:80 T400:80 W640:71 H640:105) 440:20 760:PASS 760:10 780:28 560:13 570:52 760:43 760:19 570:27 690:69 690:11
-const KServer16 = {morning: 745, afternoon: 690}; // (M540:21 T380:85 W680:PASS H680:39) 400:41 760:16 800:57 740:PASS 740:52 770:38 740:PASS 840:59 560:39 690:47 690:7
+const KServer01 = {morning: 1950, afternoon: 660}; // (M500:50 T380:47 W680:67 H680:71) 1000:72 720:15 700:PASS 700:PASS 700:PASS 700:44 700:25 740:38 740:81 710:60 660:62 660:52
+const KServer02 = {morning: 1850, afternoon: 660}; // (M560:70 T380:63 W640:112 H680:28) 960:71 720:1 700:21 740:6 760:26 770:62 720:PASS 820:22 740:80 700:80 660:PASS 660:67
+const KServer03 = {morning: 1750, afternoon: 690}; // (M500:32 T380:84 W620:128 H680:177) 920:70 720:17 700:PASS 700:PASS 700:51 730:28 700:42 700:41 740:80 690:PASS 690:36 690:74
+const KServer04 = {morning: 1650, afternoon: 700}; // (M500:74 T380:93 W600:118 H680:81) 880:63 720:PASS 720:3 700:PASS 700:27 730:23 720:70 820:57 740:80 680:65 660:55 660:58
+const KServer05 = {morning: 1950, afternoon: 680}; // (M640:52 T400:89 W460:131 H680:100) 800:PASS 840:21 840:3 840:missed 400:5 400:13 800:52 800:14 670:5 680:41 680:50
+const KServer06 = {morning: 1850, afternoon: 720}; // (M600:61 T400:53 W460:85 H680:79) 800:PASS 800:3 800:17 800:missed 400:8 400:PASS 800:85 900:27 660:66 690:48 690:57
+const KServer07 = {morning: 1750, afternoon: 660}; // (M560:63 T400:55 W460:26 H500:94) 760:PASS 760:32 760:missed 560:41 770:26 760:PASS 760:PASS 650:18 660:92 660:59
+const KServer08 = {morning: 1650, afternoon: 670}; // (M520:49 T400:60 W460:95 H690:20) 720:1 720:31 720:PASS 720:mised 720:31 740:1 740:40 840:48 640:1 660:PASS 660:PASS
+const KServer09 = {morning: 1950, afternoon: 670}; // (M480:PASS T480:70 W460:76 H680:70) 680:PASS 680:PASS 680:23 700:23 800:89 800:25 630:15 660:54 660:48
+const KServer10 = {morning: 1850, afternoon: 680}; // (M560:123 T420:64 W460:90 H680:68) 760:PASS 760:PASS 760:PASS 760:15 770:37 720:PASS 820:35 620:14 660:31 660:62
+const KServer11 = {morning: 1750, afternoon: 660}; // (M400:43 T420:70 W460:59 H680:132) 600:PASS 600:PASS 600:1 600:34 770:PASS 770:37 770:54 610:? 660:69 660:12
+const KServer12 = {morning: 1650, afternoon: 660}; // (M360:16 T380:58 W460:98 H680:131) 560:23 560:PASS 560:4 560:PASS 560:43 770:60 720:33 820:17 600:10 660:64 660:15
+const KServer13 = {morning: 1950, afternoon: 670}; // (M600:60 T480:73 W600:167 H680:110) 520:3 760:22 800:PASS 780:17 360:42 770:5 800:39 800:34 590:67 660:56 660:PASS
+const KServer14 = {morning: 1850, afternoon: 660}; // (M520:110 T400:86 W620:79 H680:42) 480:39 760:26 800:34 720:PASS 720:56 770:36 720:PASS 820:55 580:62 660:101 660:60
+const KServer15 = {morning: 1750, afternoon: 670}; // (M500:80 T400:80 W640:71 H640:105) 440:20 760:PASS 760:10 780:28 560:13 570:52 760:43 760:19 570:27 690:69 690:11
+const KServer16 = {morning: 1650, afternoon: 690}; // (M540:21 T380:85 W680:PASS H680:39) 400:41 760:16 800:57 740:PASS 740:52 770:38 740:PASS 840:59 560:39 690:47 690:7
 
-const brave = {morning: 695, afternoon: 680}; // noon 680 17ms 5 tab : PASSED
-const edge = {morning: 695, afternoon: 680}; // 740:69
-const my5600x = {morning: 695, afternoon: 680}; // 750:?
+const brave = {morning: 1650, afternoon: 680}; // noon 680 17ms 5 tab : PASSED
+const edge = {morning: 1650, afternoon: 680}; // 740:69
+const my5600x = {morning: 1650, afternoon: 680}; // 750:?
 
-const win7ssd = {morning: 695, afternoon: 720}; // 760:45
+const win7ssd = {morning: 1650, afternoon: 720}; // 760:45
 
-const Wildcard = {morning: 700, afternoon: 680}; // 720:
+const Wildcard = {morning: 745, afternoon: 680}; // 720:
 
 //const AllBraveKservers = {morning: 3000, afternoon: 1800}; 
 const AllBraveKservers = {morning: 745, afternoon: 720}; // 1800
 
 
-// const brave = {morning: 2550, afternoon: 1800}; // W2550:17 1050 Friday Morning fast repeat 5 tabs 425 Working 
-// const edge = {morning: 2550, afternoon: 1800}; // W:2550:29 1050 Afternoon 2400 no good 675 5 tabs repeats worked
-// const my5600x = {morning: 2550, afternoon: 1800}; // W2550:PASSED 1050 SAT afternoon 5 tabs 350 worked, 2800 single okay 2540 old value, Monday morning/Afternoon 650 single not working
 
-// const win7ssd = {morning: 2950, afternoon: 1800}; // 1800 2150  SAT 2150 single NOT good. 350
-
-// const Wildcard = {morning: 2850, afternoon: 740}; //W640:81,160,93,101 760:(server 17 18 pass)(server18:17,20:33  ) 1800 
-
-// //const AllBraveKservers = {morning: 3000, afternoon: 1800}; 
-// const AllBraveKservers = {morning: 2850, afternoon: 580}; // 1800
-
-// const KServer01 = {morning: 720, afternoon: 700}; // (M500:50 T380:47 W680:67 H680:71) 1000:72 720:15 700:PASS 700:PASS 700:PASS 700:44 700:25 (sun 2800, mon 1660) (1850)  
-// const KServer02 = {morning: 700, afternoon: 720}; // (M560:70 T380:63 W640:112 H680:28) 960:71 720:1 700:21 740:6 760:26 770:62 720:PASS () (sun 1850)
-// const KServer03 = {morning: 760, afternoon: 700}; // (M500:32 T380:84 W620:128 H680:177) 920:70 720:17 700:PASS 700:PASS 700:51 730:28 700:42
-// const KServer04 = {morning: 720, afternoon: 720}; // (M500:74 T380:93 W600:118 H680:81) 880:63 720:PASS 720:3 700:PASS 700:27 730:23 720:70
-// const KServer05 = {morning: 730, afternoon: 800}; // (M640:52 T400:89 W460:131 H680:100) 800:PASS 840:21 840:3 840:missed 400:5 400:13 800:52
-// const KServer06 = {morning: 720, afternoon: 800}; // (M600:61 T400:53 W460:85 H680:79) 800:PASS 800:3 800:17 800:missed 400:8 400:PASS 800:85 (mon 1760) (wed 800)
-// const KServer07 = {morning: 720, afternoon: 760}; // (M560:63 T400:55 W460:26 H500:94) 760:PASS 760:32 760:missed 560:41 770:26 760:PASS () (wed 760)
-// const KServer08 = {morning: 690, afternoon: 740}; // (M520:49 T400:60 W460:95 H680:20) 720:1 720:31 720:PASS 720:mised 720:31 740:1 740:40 () (wed 720)
-// const KServer09 = {morning: 720, afternoon: 800}; // (M480:PASS T480:70 W460:76 H680:70) 680:PASS 680:PASS 680:23 700:23 800:89 (mon 1820) (sun 1850)
-// const KServer10 = {morning: 710, afternoon: 720}; // (M560:123 T420:64 W460:90 H680:68) 760:PASS 760:PASS 760:PASS 760:15 770:37 720:PASS () (sun 1800)
-// const KServer11 = {morning: 740, afternoon: 770}; // (M400:43 T420:70 W460:59 H680:132) 600:PASS 600:PASS 600:1 600:34 770:PASS 770:37 () (sun 1800)
-// const KServer12 = {morning: 740, afternoon: 720}; // (M360:16 T380:58 W460:98 H680:131) 560:23 560:PASS 560:4 560:PASS 560:43 770:60 720:33 () (sun1200)
-// const KServer13 = {morning: 720, afternoon: 800}; // (M600:60 T480:73 W600:167 H680:110) 520:3 760:22 800:PASS 780:17 360:42 770:5 800:39 () (sun 1800)
-// const KServer14 = {morning: 700, afternoon: 720}; // (M520:110 T400:86 W620:79 H680:42) 480:39 760:26 800:34 720:PASS 720:56 770:36 720:PASS
-// const KServer15 = {morning: 690, afternoon: 760}; // (M500:80 T400:80 W640:71 H640:105) 440:20 760:PASS 760:10 780:28 560:13 570:52 760:43 () (sun 1500)
-// const KServer16 = {morning: 690, afternoon: 740}; // (M540:21 T380:85 W680:PASS H680:39) 400:41 760:16 800:57 740:PASS 740:52 770:38 740:PASS (mon 1960)
-
-// const brave = {morning: 2550, afternoon: 1800}; // W2550:17 1050 Friday Morning fast repeat 5 tabs 425 Working 
-// const edge = {morning: 2550, afternoon: 1800}; // W:2550:29 1050 Afternoon 2400 no good 675 5 tabs repeats worked
-// const my5600x = {morning: 2550, afternoon: 1800}; // W2550:PASSED 1050 SAT afternoon 5 tabs 350 worked, 2800 single okay 2540 old value, Monday morning/Afternoon 650 single not working
-
-// const win7ssd = {morning: 2950, afternoon: 1800}; // 1800 2150  SAT 2150 single NOT good. 350
-
-// const Wildcard = {morning: 640, afternoon: 560}; //W640:81,160,93,101 760:(server 17 18 pass)(server18:17,20:33  ) 1800 
-
-
-// //const AllBraveKservers = {morning: 3000, afternoon: 1800}; 
-// const AllBraveKservers = {morning: 1350, afternoon: 780}; // 1800
-
-
-
-// const KServer01 = {morning: 500, afternoon: 700}; // 1000,720 1000:72 720:15 700:PASS 700:PASS (sun 2800, mon 1660) (1850)  
-// const KServer02 = {morning: 560, afternoon: 760}; // 960:71 720:1 700:21 740:6 () (sun 1850)
-// const KServer03 = {morning: 500, afternoon: 700}; // 920:70 720:17 700:PASS 700:PASS
-// const KServer04 = {morning: 500, afternoon: 700}; // 880,720 63 720:PASS 720:3 700:PASS
-// const KServer05 = {morning: 640, afternoon: 840}; // 840,840 PASS 840:21 840:3 840:missed
-// const KServer06 = {morning: 600, afternoon: 800}; // 800,800 PASS 800:3 800:17 800:missed (mon 1760) (wed 800)
-// const KServer07 = {morning: 560, afternoon: 760}; // 760,760 760:PASS 760:32 760:missed () (wed 760)
-// const KServer08 = {morning: 520, afternoon: 720}; // 720,720 720:1 720:31 720:PASS 720:mised () (wed 720)
-// const KServer09 = {morning: 480, afternoon: 680}; // 680,680 unknown 680:PASS 680:PASS (mon 1820) (sun 1850)
-// const KServer10 = {morning: 560, afternoon: 760}; // 640,760 760:PASS 760:PASS 760:PASS () (sun 1800)
-// const KServer11 = {morning: 400, afternoon: 600}; // 600,600 600:PASS 600:PASS 600:1 () (sun 1800)
-// const KServer12 = {morning: 360, afternoon: 560}; // 560,560 560:23 560:PASS 560:4 560:PASS () (sun1200)
-// const KServer13 = {morning: 600, afternoon: 800}; // 520,760 520:3 760:22 800:PASS 780:17 () (sun 1800)
-// const KServer14 = {morning: 520, afternoon: 720}; // 480,760 480:39 760:26 800:34 720:PASS
-// const KServer15 = {morning: 580, afternoon: 780}; // 440,760 440:20 760:PASS 760:10 780:28 () (sun 1500)
-// const KServer16 = {morning: 540, afternoon: 740}; // 400,760 400:41 760:16 800:57 740:PASS (mon 1960)
 
 switch(serverParam) {
   case "KServer01":
