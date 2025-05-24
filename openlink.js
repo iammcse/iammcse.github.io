@@ -1,8 +1,7 @@
-<script>
-
 const queryString = window.location.search;
 console.log("queryString: " + queryString);
-// https://iammcse.github.io/opentabs.html?morningParam=0&afternoonParam=0&serverParam=edge&offset=0
+// https://iammcse.github.io/openlink.js
+// ?morningParam=0&afternoonParam=0&serverParam=5600x&offset=0
 const urlParams = new URLSearchParams(queryString);
 const serverParam = urlParams.get("serverParam");
 console.log('serverParam: ' + serverParam);
@@ -27,8 +26,7 @@ console.log('offset: ' + offset);
 //7 numbers specify [year], [month], [day], [hour], [minute], [second], and [millisecond] (in that order)
 const today = new Date();
 const morningSession = new Date(today.getFullYear(),today.getMonth(),today.getDate(),9,30,0,0);
-//const afternoonSession = new Date(today.getFullYear(),today.getMonth(),today.getDate(),17,0,0,0);
-const afternoonSession = new Date(today.getFullYear(),today.getMonth(),today.getDate(),18,9,0,0);
+const afternoonSession = new Date(today.getFullYear(),today.getMonth(),today.getDate(),17,0,0,0);
 const midnight = new Date(today.getFullYear(),today.getMonth(),today.getDate(),23,59,59,999);
 // set number of seconds before launch
 
@@ -55,7 +53,7 @@ const KServer14 = {morning: 760, afternoon: 760};
 const KServer15 = {morning: 760, afternoon: 760}; 
 const KServer16 = {morning: 760, afternoon: 760};
 
-const my5600x = {morning: 960, afternoon: 760};
+const my5600x = {morning: 0, afternoon: 760};
 const win7ssd = {morning: 860, afternoon: 860};
 const edge = {morning: 1160, afternoon: 760}; 
 const brave = {morning: 960, afternoon:760}; 
@@ -332,7 +330,3 @@ var x = setInterval(function() {
     document.title = "EXPIRED";
   }
 }, 100);
-
-</script>
-
-
