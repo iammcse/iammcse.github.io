@@ -194,8 +194,8 @@ switch(serverParam) {
     console.log("switching Wildcard");
   break;
   default:
-  currentServer.morning = 2950;
-  currentServer.afternoon = 2850;
+  currentServer.morning = 1150;
+  currentServer.afternoon = 650;
   console.log("switching to Default");
 }
 
