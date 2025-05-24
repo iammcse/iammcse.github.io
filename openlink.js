@@ -1,7 +1,7 @@
 const queryString = window.location.search;
 console.log("queryString: " + queryString);
 // https://iammcse.github.io/openlink.js
-// ?morningParam=0&afternoonParam=0&serverParam=5600x&offset=0
+// https://booking.kscgolf.org.hk/?morningParam=0&afternoonParam=0&serverParam=my5600x&offset=0
 const urlParams = new URLSearchParams(queryString);
 const serverParam = urlParams.get("serverParam");
 console.log('serverParam: ' + serverParam);
@@ -321,7 +321,7 @@ var x = setInterval(function() {
   var milliseconds = distance % 1000;
     
   // Output the result in an element with id="Canvas"
-  document.title = minutes + "m" + seconds + "s " + titleDate;
+  document.title = hours + "h" minutes + "m" + seconds + "s " + titleDate;
   //+ milliseconds +"ms"
     
   // If the count down is over, write some text 
