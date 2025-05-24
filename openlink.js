@@ -53,7 +53,7 @@ const KServer14 = {morning: 760, afternoon: 760};
 const KServer15 = {morning: 760, afternoon: 760}; 
 const KServer16 = {morning: 760, afternoon: 760};
 
-const my5600x = {morning: 500, afternoon: 760};
+const my5600x = {morning: 0, afternoon: 760};
 const win7ssd = {morning: 860, afternoon: 860};
 const edge = {morning: 1160, afternoon: 760}; 
 const brave = {morning: 960, afternoon:760}; 
