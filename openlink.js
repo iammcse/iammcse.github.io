@@ -321,7 +321,7 @@ var x = setInterval(function() {
   var milliseconds = distance % 1000;
     
   // Output the result in an element with id="Canvas"
-  document.title = hours + "h" minutes + "m" + seconds + "s " + titleDate;
+  document.title = hours + "h" + minutes + "m" + seconds + "s " + titleDate;
   //+ milliseconds +"ms"
     
   // If the count down is over, write some text 
