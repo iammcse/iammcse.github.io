@@ -2,7 +2,7 @@
 
 const queryString = window.location.search;
 console.log("queryString: " + queryString);
-// ?server=shirt&color=blue&newuser&size=m
+// https://iammcse.github.io/opentabs.html?morningParam=0&afternoonParam=0&serverParam=edge&offset=0
 const urlParams = new URLSearchParams(queryString);
 const serverParam = urlParams.get("serverParam");
 console.log('serverParam: ' + serverParam);
@@ -12,8 +12,8 @@ const afternoonParam = urlParams.get("afternoonParam");
 console.log('afternoonParam: ' + afternoonParam);
 
 let offset = urlParams.get("offset");
-//let offset = 0;
 
+//let offset = 0;
 if (offset == null || offset == "" ){
   
   offset = 0; 
@@ -21,15 +21,14 @@ if (offset == null || offset == "" ){
 }
 console.log('offset: ' + offset);
 
-// Declare constants 
-const ksc_URL = "https://kscgolf2.noq.com.hk/?noq_c=kscgolf&noq_r=https%3A%2F%2Fbooking.kscgolf.org.hk%2FwaitingRoom%3F";
 //https://kscgolf2.noq.com.hk/?noq_c=kscgolf&noq_r=https%3A%2F%2Fbooking.kscgolf.org.hk%2FwaitingRoom
 //const ksc_URL = "https://booking.kscgolf.org.hk/waitingRoom";
 
 //7 numbers specify [year], [month], [day], [hour], [minute], [second], and [millisecond] (in that order)
 const today = new Date();
 const morningSession = new Date(today.getFullYear(),today.getMonth(),today.getDate(),9,30,0,0);
-const afternoonSession = new Date(today.getFullYear(),today.getMonth(),today.getDate(),17,0,0,0);
+//const afternoonSession = new Date(today.getFullYear(),today.getMonth(),today.getDate(),17,0,0,0);
+const afternoonSession = new Date(today.getFullYear(),today.getMonth(),today.getDate(),18,9,0,0);
 const midnight = new Date(today.getFullYear(),today.getMonth(),today.getDate(),23,59,59,999);
 // set number of seconds before launch
 
@@ -39,34 +38,29 @@ var afternoon_offsetMilliSecondsValue = "0" ;
 const currentServer = {morning: 1550, afternoon: 575};
 
 
+const KServer01 = {morning: 760, afternoon: 760}; 
+const KServer02 = {morning: 760, afternoon: 760}; 
+const KServer03 = {morning: 760, afternoon: 760}; 
+const KServer04 = {morning: 760, afternoon: 760}; 
+const KServer05 = {morning: 760, afternoon: 760}; 
+const KServer06 = {morning: 760, afternoon: 760}; 
+const KServer07 = {morning: 760, afternoon: 760}; 
+const KServer08 = {morning: 760, afternoon: 760}; 
+const KServer09 = {morning: 760, afternoon: 760}; 
+const KServer10 = {morning: 760, afternoon: 760}; 
+const KServer11 = {morning: 760, afternoon: 760}; 
+const KServer12 = {morning: 760, afternoon: 760}; 
+const KServer13 = {morning: 760, afternoon: 760}; 
+const KServer14 = {morning: 760, afternoon: 760}; 
+const KServer15 = {morning: 760, afternoon: 760}; 
+const KServer16 = {morning: 760, afternoon: 760};
 
-const KServer01 = {morning: 1160, afternoon: 760}; // M1132:PASS W1132:120 TH832:89 F:1132:123 M:1132:PASS Th:1132:85 F:1232:143 ST:115 SU:2032
-const KServer02 = {morning: 760, afternoon: 760}; // M832:48 W832:42 TH832:52 F:1132:64 M:932:35 Th:932:106 F:1232:79 ST:107 SU:1932
-const KServer03 = {morning: 960, afternoon: 760}; // M1132:PASS W1132:61 TH832:PASS F:1132:114 M:932:4 Th:932:5 F:1232:96 ST:112 SU:1832
-const KServer04 = {morning: 760, afternoon: 760}; // M832:3 W832:136 TH832:66 F:1132:118 M:932:20 Th:932:PASS F:1232:21 ST:103 SU:1732
-const KServer05 = {morning: 1160, afternoon: 760}; // M1132:PASS W1132:117 TH832:90 F:1132:110 M:1132:17 Th:1132:91 F:1232:20 ST:120 SU:1632
-const KServer06 = {morning: 760, afternoon: 760}; // M832:PASS W832:63 TH832:91 F:1132:79 M:1132:26 Th:1132:96 F:1232:75 ST:51 SU:1532
-const KServer07 = {morning: 960, afternoon: 760}; // M1132:22 W1132:128 TH832:26 F:1132:102 M:932:112 Th:932:PASS F:1232:87 ST:123 SU:1432
-const KServer08 = {morning: 960, afternoon: 760}; // M832:9 W832:117 TH832:54 F:1132:88 M:932:8 Th:1132:92 F:1232:86 ST:57 SU:1332
-const KServer09 = {morning: 760, afternoon: 760}; // M832:1 W832:38 TH832:15 F:1132:87 M:932:108 Th:1132:PASS F:1232:39 ST:132 SU:1332
-const KServer10 = {morning: 960, afternoon: 760}; // M1132:29 W1132:23 TH832:92 F:1132:111 M:932:3 Th:932:102 F:1232:149 ST:PASS SU:1232
-const KServer11 = {morning: 760, afternoon: 760}; // M832:PASS W832:7 TH832:44 F:1132:116 M:932:46 Th:932:103 F:1232:56 ST:130 SU:1132
-const KServer12 = {morning: 1160, afternoon: 760}; // M1132:PASS W1132:126 TH832:105 F:1132:107 M:932:1 Th:932:113 F:1232:78 ST:145 SU:1032
-const KServer13 = {morning: 760, afternoon: 760}; // M832:24 W832:31 TH832:34 F:1132:106 M:932:10 Th:932:21 F:1232:NONE3 ST:127 SU:932 
-const KServer14 = {morning: 960, afternoon: 760}; // M1132:PASS W1132:137 TH832:29 F:1132:97 M:932:36 Th:1132:PASS F:1232:NONE63 ST:141 SU:832
-const KServer15 = {morning: 760, afternoon: 760}; // M832:5 W832:114 TH832:51 F:1132:105 M:932:19 Th:1132:90 F:1232:NONE3 ST:142 SU:732
-const KServer16 = {morning: 1160, afternoon: 760}; // M1132:PASS W1132:40 TH832:107 F:1132:PASS M:932:15 Th:1132:97 F:1232:NONE63 ST:96 SU:632
-
-
-
-const my5600x = {morning: 960, afternoon: 760}; // 1410 Monday Afternoon 410 3 tabs proxied worked 
-const win7ssd = {morning: 860, afternoon: 860}; //1410 720ms 1s x 2 3 tabs
-const edge = {morning: 1160, afternoon: 760}; //1410 740:69
-const brave = {morning: 960, afternoon:760}; //1410 afternoon 680 17ms 5 tab : PASSED
-
-const Wildcard = {morning: 1160, afternoon: 760}; // M:455:ALLPASS :
-
-const AllBraveKservers = {morning: 2932, afternoon: 639}; // 
+const my5600x = {morning: 960, afternoon: 760};
+const win7ssd = {morning: 860, afternoon: 860};
+const edge = {morning: 1160, afternoon: 760}; 
+const brave = {morning: 960, afternoon:760}; 
+const Wildcard = {morning: 1160, afternoon: 760};
+const AllBraveKservers = {morning: 2932, afternoon: 639};  
 
 switch(serverParam) {
   case "KServer01":
@@ -261,33 +255,29 @@ console.log("offsetMilliSecondsValue: " + offsetMilliSecondsValue );
 
 // https://stackoverflow.com/questions/902713/how-do-i-programmatically-click-a-link-with-javascript
   
-      var link ="https://booking.kscgolf.org.hk/waitingRoom";
+// var link ="https://booking.kscgolf.org.hk/waitingRoom";
 
-  //function clickLink(link) {
-        var cancelled = false;
+  // function clickLink(link) {
+  //       var cancelled = false;
 
-        if (document.createEvent) {
-            var event = document.createEvent("MouseEvents");
-            event.initMouseEvent("click", true, true, window,
-                0, 0, 0, 0, 0,
-                false, false, false, false,
-                0, null);
-            cancelled = !link.dispatchEvent(event);
-        }
-        else if (link.fireEvent) {
-            cancelled = !link.fireEvent("onclick");
-        }
+  //       if (document.createEvent) {
+  //           var event = document.createEvent("MouseEvents");
+  //           event.initMouseEvent("click", true, true, window,
+  //               0, 0, 0, 0, 0,
+  //               false, false, false, false,
+  //               0, null);
+  //           cancelled = !link.dispatchEvent(event);
+  //       }
+  //       else if (link.fireEvent) {
+  //           cancelled = !link.fireEvent("onclick");
+  //       }
 
-        if (!cancelled) {
-            window.location = link.href;
-        }
-    }
+  //       if (!cancelled) {
+  //           window.location = link.href;
+  //       }
+  //   }
 
-   function timeToOpen() {
-    //window.open(ksc_URL, "_self");
-    
-      //alert(myInputTime);
-   }
+
    
    //setTimeout(timeToOpen, subtractMilliSecondsValue);
    //setTimeout(clickLink(link), subtractMilliSecondsValue);
@@ -303,6 +293,45 @@ function startTime() {
 }
 //setTimeout(function() {startTime()}, 3000);
 setTimeout(function() {startTime()}, subtractMilliSecondsValue);
+
+
+// DISPLAY ------------------------------------------------------------
+
+//var displayTarget = new Date(myInputTime);
+//console.log("displayTarget is : " + myInputTime);
+//document.title = displayTarget.toDateString() ;
+
+var displayTarget = new Date(myInputTime);
+console.log("displayTarget is : " + myInputTime);
+var titleDate = displayTarget.toLocaleTimeString() + " (" + displayTarget.getMilliseconds() + "mi)";
+
+// Update the count down every 1/2 second
+
+var x = setInterval(function() {
+
+   // Get today's date and time
+   var nowUpdated = new Date().getTime();
+    
+    // Find the subtractMilliSecondsValue between now and the count down date
+    var distance = countDownDate - nowUpdated;
+
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  var milliseconds = distance % 1000;
+    
+  // Output the result in an element with id="Canvas"
+  document.title = minutes + "m" + seconds + "s " + titleDate;
+  //+ milliseconds +"ms"
+    
+  // If the count down is over, write some text 
+  if (distance < 0) {
+    clearInterval(x);
+    document.title = "EXPIRED";
+  }
+}, 100);
 
 </script>
 
