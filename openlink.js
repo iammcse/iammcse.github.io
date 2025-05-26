@@ -33,7 +33,7 @@ const midnight = new Date(today.getFullYear(),today.getMonth(),today.getDate(),2
 var offsetMilliSecondsValue = "0" ;
 var afternoon_offsetMilliSecondsValue = "0" ;
 
-const currentServer = {morning: 1550, afternoon: 575};
+const currentServer = {morning: 0, afternoon: 0};
 
 
 const KServer01 = {morning: 760, afternoon: 760}; 
@@ -194,8 +194,8 @@ switch(serverParam) {
     console.log("switching Wildcard");
   break;
   default:
-  currentServer.morning = 1150;
-  currentServer.afternoon = 650;
+  currentServer.morning = 0;
+  currentServer.afternoon = 0;
   console.log("switching to Default");
 }
 
@@ -301,7 +301,7 @@ setTimeout(function() {startTime()}, subtractMilliSecondsValue);
 
 var displayTarget = new Date(myInputTime);
 console.log("displayTarget is : " + myInputTime);
-var titleDate = displayTarget.toLocaleTimeString() + " (" + displayTarget.getMilliseconds() + "mi)";
+var titleDate = displayTarget.toLocaleTimeString("en-US", { hour12: false }) + " (" + displayTarget.getMilliseconds() + "mi)";
 
 // Update the count down every 1/2 second
 
@@ -329,4 +329,4 @@ var x = setInterval(function() {
     clearInterval(x);
     document.title = "EXPIRED";
   }
-}, 100);
+}, 250);
