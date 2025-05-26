@@ -80,6 +80,9 @@ if (offset == null || offset == "" ){
 }
 console.log('offset: ' + offset);
 
+const countdownParam = urlParams.get("countdownParam");
+console.log('countdownParam: ' + countdownParam);
+
 // Declare constants 
 const ksc_URL = "https://kscgolf2.noq.com.hk/?noq_c=kscgolf&noq_r=https%3A%2F%2Fbooking.kscgolf.org.hk%2FwaitingRoom%3F";
 //https://kscgolf2.noq.com.hk/?noq_c=kscgolf&noq_r=https%3A%2F%2Fbooking.kscgolf.org.hk%2FwaitingRoom
@@ -392,7 +395,19 @@ console.log("offsetMilliSecondsValue: " + offsetMilliSecondsValue );
 //var countDownDate = new Date(myInputTime).getTime()
   var countDownDate = myInputTime;
 // Find the subtractMilliSecondsValue between now and the count down date
-  var subtractMilliSecondsValue = countDownDate - now.getTime();
+
+//var subtractMilliSecondsValue = countDownDate - now.getTime();
+var subtractMilliSecondsValue = 0;
+
+if (countdownParam == null || countdownParam == "" || countdownParam == "0" ){
+  subtractMilliSecondsValue = countDownDate - now.getTime();
+}
+else{
+  subtractMilliSecondsValue = countdownParam;
+}
+
+
+ 
   
    function timeToOpen() {
     window.open(ksc_URL, "_self");
