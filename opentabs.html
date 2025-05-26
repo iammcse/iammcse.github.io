@@ -434,23 +434,20 @@ var x = setInterval(function() {
 
 
 <p id="triggerDate"></p>
-
 <script>
    var displayTarget = new Date(myInputTime);
     console.log("displayTarget is : " + myInputTime);
   document.getElementById("triggerDate").innerHTML = displayTarget.toDateString() ;
  </script>
+
 <p id="triggerTime"></p>
 <script>
   var displayTarget = new Date(myInputTime);
    console.log("displayTarget is : " + myInputTime);
- document.getElementById("triggerTime").innerHTML = displayTarget.toLocaleTimeString() + " (" + displayTarget.getMilliseconds() + "mi)";
+ document.getElementById("triggerTime").innerHTML = displayTarget.toLocaleTimeString("en-US", { hour12: false }) + " (" + displayTarget.getMilliseconds() + "mi)";
 </script>
 
-
 <p id="Canvas"></p>
-
-
 
 <a target="_blank" href="https://www.tutorialspoint.com/how-do-i-trigger-a-function-when-the-time-reaches-a-specific-time-in-javascript">Reference for time</a>
 </body>
