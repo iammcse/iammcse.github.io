@@ -1,7 +1,7 @@
 const queryString = window.location.search;
 console.log("queryString: " + queryString);
 // https://iammcse.github.io/openlink.js
-// https://booking.kscgolf.org.hk/?morningParam=0&afternoonParam=0&serverParam=my5600x&offset=0
+// https://booking.kscgolf.org.hk/?morningParam=0&afternoonParam=0&serverParam=my5600x&offset=0&countdownParam=2000
 const urlParams = new URLSearchParams(queryString);
 const serverParam = urlParams.get("serverParam");
 console.log('serverParam: ' + serverParam);
@@ -9,15 +9,18 @@ const morningParam = urlParams.get("morningParam");
 console.log('morningParam: ' + morningParam);
 const afternoonParam = urlParams.get("afternoonParam");
 console.log('afternoonParam: ' + afternoonParam);
+const countdownParam = urlParams.get("countdownParam");
+console.log('countdownParam: ' + countdownParam);
+
 
 let offset = urlParams.get("offset");
-
 //let offset = 0;
-if (offset == null || offset == "" ){
-  
-  offset = 0; 
 
+if (offset == null || offset == "" ){
+  offset = 0; 
 }
+
+
 console.log('offset: ' + offset);
 
 //https://kscgolf2.noq.com.hk/?noq_c=kscgolf&noq_r=https%3A%2F%2Fbooking.kscgolf.org.hk%2FwaitingRoom
@@ -248,8 +251,18 @@ console.log("offsetMilliSecondsValue: " + offsetMilliSecondsValue );
 //var countDownDate = new Date(myInputTime).getTime()
   var countDownDate = myInputTime;
 // Find the subtractMilliSecondsValue between now and the count down date
-  var subtractMilliSecondsValue = countDownDate - now.getTime();
-  
+
+var subtractMilliSecondsValue = 0;
+
+if (countdownParam == null || countdownParam == "" ){
+  subtractMilliSecondsValue = countDownDate - now.getTime();
+}
+else{
+
+  subtractMilliSecondsValue = countdownParam;
+
+}
+
 
 // https://stackoverflow.com/questions/902713/how-do-i-programmatically-click-a-link-with-javascript
   
@@ -301,7 +314,7 @@ setTimeout(function() {startTime()}, subtractMilliSecondsValue);
 
 var displayTarget = new Date(myInputTime);
 console.log("displayTarget is : " + myInputTime);
-var titleDate = displayTarget.toLocaleTimeString("en-US", { hour12: false }) + " (" + displayTarget.getMilliseconds() + "mi)";
+var titleDate = displayTarget.toLocaleTimeString("en-US", { hour12: false }) + ":" + displayTarget.getMilliseconds() + "mi";
 
 // Update the count down every 1/2 second
 
