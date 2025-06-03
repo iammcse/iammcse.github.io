@@ -1,7 +1,7 @@
 const queryString = window.location.search;
 console.log("queryString: " + queryString);
 // https://iammcse.github.io/openlink.js
-// https://booking.kscgolf.org.hk/?morningParam=0&afternoonParam=0&serverParam=my5600x&offset=0&countdownParam=-160
+// https://booking.kscgolf.org.hk/?morningParam=0&afternoonParam=0&serverParam=my5600x&offset=-160&countdownParam=0
 const urlParams = new URLSearchParams(queryString);
 const serverParam = urlParams.get("serverParam");
 console.log('serverParam: ' + serverParam);
@@ -39,29 +39,29 @@ var afternoon_offsetMilliSecondsValue = "0" ;
 const currentServer = {morning: 0, afternoon: 0};
 
 
-const KServer01 = {morning: 760, afternoon: 760}; 
-const KServer02 = {morning: 760, afternoon: 760}; 
-const KServer03 = {morning: 760, afternoon: 760}; 
-const KServer04 = {morning: 760, afternoon: 760}; 
-const KServer05 = {morning: 760, afternoon: 760}; 
-const KServer06 = {morning: 760, afternoon: 760}; 
-const KServer07 = {morning: 760, afternoon: 760}; 
-const KServer08 = {morning: 760, afternoon: 760}; 
-const KServer09 = {morning: 760, afternoon: 760}; 
-const KServer10 = {morning: 760, afternoon: 760}; 
-const KServer11 = {morning: 760, afternoon: 760}; 
-const KServer12 = {morning: 760, afternoon: 760}; 
-const KServer13 = {morning: 760, afternoon: 760}; 
-const KServer14 = {morning: 760, afternoon: 760}; 
-const KServer15 = {morning: 760, afternoon: 760}; 
-const KServer16 = {morning: 760, afternoon: 760};
+const KServer01 = {morning: 0, afternoon: 0}; 
+const KServer02 = {morning: 0, afternoon: 0}; 
+const KServer03 = {morning: 0, afternoon: 0}; 
+const KServer04 = {morning: 0, afternoon: 0}; 
+const KServer05 = {morning: 0, afternoon: 0}; 
+const KServer06 = {morning: 0, afternoon: 0}; 
+const KServer07 = {morning: 0, afternoon: 0}; 
+const KServer08 = {morning: 0, afternoon: 0}; 
+const KServer09 = {morning: 0, afternoon: 0}; 
+const KServer10 = {morning: 0, afternoon: 0}; 
+const KServer11 = {morning: 0, afternoon: 0}; 
+const KServer12 = {morning: 0, afternoon: 0}; 
+const KServer13 = {morning: 0, afternoon: 0}; 
+const KServer14 = {morning: 0, afternoon: 0}; 
+const KServer15 = {morning: 0, afternoon: 0}; 
+const KServer16 = {morning: 0, afternoon: 0};
 
-const my5600x = {morning: 160, afternoon: 760};
-const win7ssd = {morning: 860, afternoon: 860};
-const edge = {morning: 1160, afternoon: 760}; 
-const brave = {morning: 960, afternoon:760}; 
-const Wildcard = {morning: 1160, afternoon: 760};
-const AllBraveKservers = {morning: 2932, afternoon: 639};  
+const my5600x = {morning: 0, afternoon: 0};
+const win7ssd = {morning: 0, afternoon: 0};
+const edge = {morning: 0, afternoon: 0}; 
+const brave = {morning: 0, afternoon:0}; 
+const Wildcard = {morning: 0, afternoon: 0};
+const AllBraveKservers = {morning: 0, afternoon: 0};  
 
 switch(serverParam) {
   case "KServer01":
@@ -292,7 +292,7 @@ else{
    //setTimeout(clickLink(link), subtractMilliSecondsValue);
 
 
-console.log('subtractMilliSecondsValue = ' subtractMilliSecondsValue);
+console.log('subtractMilliSecondsValue = ' + subtractMilliSecondsValue);
 
 function startTime() {
   var xPathRes = document.evaluate ('//*[@id="root"]/div[2]/div[2]/div/div/div[2]/a', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);
@@ -301,10 +301,11 @@ function startTime() {
 }
 //setTimeout(function() {startTime()}, 3000);
 //setTimeout(function() {startTime()}, subtractMilliSecondsValue);
-setTimeout(window.location.href = 'https://kscgolf2.noq.com.hk/?noq_c=kscgolf&noq_r=https%3A%2F%2Fbooking.kscgolf.org.hk%2FwaitingRoom%3F', subtractMilliSecondsValue);
-//window.location.href = 'https://kscgolf2.noq.com.hk/?noq_c=kscgolf&noq_r=https%3A%2F%2Fbooking.kscgolf.org.hk%2FwaitingRoom%3F'
+function gotoURL() {
+window.location.href = 'https://kscgolf2.noq.com.hk/?noq_c=kscgolf&noq_r=https%3A%2F%2Fbooking.kscgolf.org.hk%2FwaitingRoom%3F';
+}
 
-
+setTimeout(function() {gotoURL()}, subtractMilliSecondsValue);
 // DISPLAY ------------------------------------------------------------
 
 //var displayTarget = new Date(myInputTime);
@@ -322,15 +323,15 @@ var x = setInterval(function() {
    var nowUpdated = new Date().getTime();
    // Find the subtractMilliSecondsValue between now and the count down date
    
-   if (countdownParam == null || countdownParam == "" || countdownParam == "0" ){
-        var distance = subtractMilliSecondsValue;
-    }
-    else{
-        var distance = countDownDate - nowUpdated;
+//    if (countdownParam == null || countdownParam == "" || countdownParam == "0" ){
+//         var distance = subtractMilliSecondsValue;
+//     }
+//     else{
+//         var distance = countDownDate - nowUpdated;
         
-    }
+//     }
    
-   
+           var distance = countDownDate - nowUpdated;
 
    // Time calculations for days, hours, minutes and seconds
    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
