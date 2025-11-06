@@ -200,6 +200,7 @@ const KServer16 = {morning: 860, afternoon: 476}; // M1132:PASS W1132:40 TH832:1
 
 //const my5600x = {morning: 860, afternoon: 310};
 const my5600x = {morning: 860, afternoon: 350}; // 200ms-320ms cycle / 1410 Monday Afternoon 410 3 tabs proxied worked 
+const ux8608ca = {morning: 860, afternoon: 250}; // 200ms-320ms cycle / 1410 Monday Afternoon 410 3 tabs proxied worked 
 const win7ssd = {morning: 1250, afternoon: 760}; //1410 720ms 1s x 2 3 tabs
 const brave = {morning: 860, afternoon: 350}; //1410 afternoon 680 17ms 5 tab : PASSED
 const edge = {morning: 860, afternoon: 350}; //1410 740:69
@@ -317,6 +318,12 @@ switch(serverParam) {
     currentServer.afternoon = my5600x.afternoon;
     document.title = "my5600x";
     console.log("switching my5600x");
+  break;
+  case "ux8608ca":
+    currentServer.morning = ux8608ca.morning ;
+    currentServer.afternoon = ux8608ca.afternoon;
+    document.title = "ux8608ca";
+    console.log("switching ux8608ca");
   break;
   case "edge":
     currentServer.morning = edge.morning ;
