@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Time Controller - Options</title>
+<style>
+  :root {
+    --bg: #f5f5f5;
+    --card-bg: #fff;
+    --text: #333;
+    --text-secondary: #666;
+    --border: #ddd;
+    --primary: #1a73e8;
+    --primary-hover: #1557b0;
+    --danger: #d93025;
+    --danger-hover: #b3261e;
+    --radius: 8px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    padding: 24px 16px;
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  header h1 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  header p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+  }
+
+  .rule-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow);
+  }
+
+  .rule-header {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  .rule-name {
+    flex: 1;
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 6px 10px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+  }
+
+  .btn-delete {
+    background: none;
+    border: none;
+    color: var(--danger);
+    font-size: 1.3rem;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    line-height: 1;
+  }
+
+  .btn-delete:hover {
+    background: #fce8e6;
+  }
+
+  .rule-row {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+
+  .rule-row label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+
+  .rule-row input[type="time"] {
+    padding: 4px 8px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-family: inherit;
+  }
+
+  .rule-days {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+
+  .rule-days label {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    padding: 3px 8px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    user-select: none;
+  }
+
+  .rule-days label:has(:checked) {
+    background: #e8f0fe;
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+
+  .rule-days input[type="checkbox"] {
+    accent-color: var(--primary);
+  }
+
+  details {
+    margin-top: 12px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 8px 12px;
+  }
+
+  details[open] {
+    padding-bottom: 12px;
+  }
+
+  summary {
+    cursor: pointer;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    padding: 2px 0;
+  }
+
+  .hint {
+    font-weight: 400;
+    font-size: 0.8rem;
+    color: #999;
+  }
+
+  textarea {
+    width: 100%;
+    margin-top: 8px;
+    padding: 8px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 0.85rem;
+    resize: vertical;
+  }
+
+  .btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  .btn-primary {
+    background: var(--primary);
+    color: #fff;
+  }
+
+  .btn-primary:hover { background: var(--primary-hover); }
+
+  .btn-secondary {
+    background: #fff;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+
+  .btn-secondary:hover { background: #f0f0f0; }
+
+  .btn-add {
+    display: block;
+    width: 100%;
+    background: none;
+    border: 2px dashed var(--border);
+    color: var(--text-secondary);
+    padding: 14px;
+    margin-bottom: 20px;
+    border-radius: var(--radius);
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+
+  .btn-add:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+
+  .actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+  }
+
+  .status-success, .status-error {
+    text-align: center;
+    margin-top: 16px;
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  .status-success { background: #e6f4ea; color: #137333; }
+  .status-error   { background: #fce8e6; color: #c5221f; }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>Time-Based Chrome Controller</h1>
+    <p>Configure time-based rules for extensions and startup tabs.</p>
+  </header>
+
+  <main>
+    <div id="rules-container"></div>
+
+    <button type="button" id="add-rule" class="btn-add">+ Add Rule</button>
+
+    <div class="actions">
+      <button type="button" id="save" class="btn btn-primary">Save</button>
+      <button type="button" id="reset" class="btn btn-secondary">Reset to Default</button>
+    </div>
+
+    <div id="status"></div>
+  </main>
+</div>
+
+<script src="options.js"></script>
+</body>
+</html>

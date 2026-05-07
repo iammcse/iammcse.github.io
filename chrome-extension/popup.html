@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    width: 360px;
+    padding: 16px;
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 13px;
+    color: #333;
+    background: #fff;
+  }
+
+  h2 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #1a73e8;
+  }
+
+  .info {
+    padding: 4px 0;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .info strong { color: #555; }
+
+  hr {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 12px 0;
+  }
+
+  .section-title {
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+  }
+
+  .ext-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 8px;
+    border-radius: 4px;
+    background: #f8f9fa;
+    margin-bottom: 4px;
+  }
+
+  .ext-name {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 12px;
+  }
+
+  .ext-status {
+    font-size: 11px;
+    font-weight: 500;
+    flex-shrink: 0;
+    margin-left: 8px;
+  }
+
+  .status-enabled  { color: #137333; }
+  .status-disabled { color: #c5221f; }
+  .status-missing  { color: #888; }
+
+  .empty {
+    text-align: center;
+    color: #999;
+    padding: 16px 0;
+    font-style: italic;
+  }
+
+  .error {
+    color: #c5221f;
+    padding: 8px;
+    background: #fce8e6;
+    border-radius: 4px;
+  }
+
+  .actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 14px;
+  }
+
+  button {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    color: #333;
+  }
+
+  button:hover { background: #f0f0f0; }
+
+  button.primary {
+    background: #1a73e8;
+    color: #fff;
+    border-color: #1a73e8;
+  }
+
+  button.primary:hover { background: #1557b0; }
+
+  .loading { text-align: center; color: #999; padding: 12px 0; }
+</style>
+</head>
+<body>
+  <h2>Time Controller</h2>
+  <div id="content"><div class="loading">Loading&hellip;</div></div>
+  <div class="actions">
+    <button id="btn-options">Options</button>
+    <button id="btn-refresh">Refresh</button>
+    <button id="btn-apply" class="primary">Apply Now</button>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

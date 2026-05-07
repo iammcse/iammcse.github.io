@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "Time-Based Chrome Controller",
+  "version": "1.0.0",
+  "description": "Automatically enable/disable extensions and manage startup tabs based on local time rules.",
+  "permissions": [
+    "management",
+    "storage",
+    "alarms",
+    "tabs"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Time Controller"
+  }
+}
