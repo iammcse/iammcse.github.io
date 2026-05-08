@@ -119,16 +119,53 @@ async function applyExtensions(rule) {
 
 // --- Startup tabs ---
 
+async function waitForWindow(attempts) {
+  for (let i = 0; i < attempts; i++) {
+    const windows = await chrome.windows.getAll();
+    if (windows.length > 0) return windows[0].id;
+    await new Promise(r => setTimeout(r, 250));
+  }
+  return null;
+}
+
 async function openStartupTabs(rule) {
-  if (!rule || !rule.startupTabs) return;
-  for (const url of rule.startupTabs) {
-    const trimmed = url.trim();
-    if (!trimmed) continue;
+  if (!rule || !rule.startupTabs || !rule.startupTabs.length) return;
+
+  const urls = rule.startupTabs.map(s => s.trim()).filter(Boolean);
+  if (!urls.length) return;
+
+  // Wait for Chrome to finish creating its initial window.
+  // onStartup fires early; tabs created before a window exists may land
+  // in the wrong window or be hidden behind session-restore tabs.
+  const windowId = await waitForWindow(8);
+
+  const tabIds = [];
+  for (let i = 0; i < urls.length; i++) {
     try {
-      await chrome.tabs.create({ url: trimmed, active: false });
+      const tab = await chrome.tabs.create({
+        url: urls[i],
+        active: i === 0,
+        windowId
+      });
+      tabIds.push(tab.id);
     } catch (e) {
-      console.warn('Cannot open tab', trimmed, ':', e.message);
+      console.warn('Cannot open startup tab', urls[i], ':', e.message);
     }
+  }
+
+  // Remove blank / new-tab placeholders Chrome opens by default so the
+  // user sees only the configured startup tabs in that window.
+  if (tabIds.length > 0) {
+    try {
+      const firstTab = await chrome.tabs.get(tabIds[0]);
+      const tabs = await chrome.tabs.query({ windowId: firstTab.windowId });
+      for (const tab of tabs) {
+        if (tabIds.includes(tab.id)) continue;
+        if (!tab.url || tab.url === 'chrome://newtab/' || tab.url === 'about:newtab' || tab.url === 'about:blank') {
+          chrome.tabs.remove(tab.id).catch(() => {});
+        }
+      }
+    } catch (e) { /* non-critical */ }
   }
 }
 
