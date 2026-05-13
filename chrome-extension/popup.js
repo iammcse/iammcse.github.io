@@ -1,4 +1,4 @@
-// Time-Based Chrome Controller - Popup Script
+// KSC hub - Popup Script
 
 function timeToMinutes(timeStr) {
   const [h, m] = timeStr.split(':').map(Number);
@@ -131,8 +131,58 @@ async function render() {
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+// --- Theme ---
+
+const THEME_ICONS = { light: '☀️', dark: '🌙', auto: '◐' };
+const THEME_LABELS = { light: 'Light mode', dark: 'Dark mode', auto: 'Auto (system)' };
+
+let _themeMode = 'auto';
+const _systemDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+function resolveTheme(mode) {
+  if (mode === 'auto') return _systemDark.matches ? 'dark' : 'light';
+  return mode;
+}
+
+async function initTheme() {
+  const stored = await chrome.storage.local.get('theme');
+  _themeMode = stored.theme || 'auto';
+  document.documentElement.setAttribute('data-theme', resolveTheme(_themeMode));
+  updateThemeToggle();
+}
+
+function updateThemeToggle() {
+  const btn = document.getElementById('theme-toggle');
+  if (btn) {
+    btn.textContent = THEME_ICONS[_themeMode];
+    btn.title = THEME_LABELS[_themeMode] + ' — click to switch';
+  }
+}
+
+async function toggleTheme() {
+  const modes = ['light', 'dark', 'auto'];
+  const idx = modes.indexOf(_themeMode);
+  const next = modes[(idx + 1) % 3];
+  _themeMode = next;
+  document.documentElement.setAttribute('data-theme', resolveTheme(next));
+  updateThemeToggle();
+  await chrome.storage.local.set({ theme: next });
+}
+
+_systemDark.addEventListener('change', () => {
+  if (_themeMode === 'auto') {
+    document.documentElement.setAttribute('data-theme', resolveTheme('auto'));
+  }
+});
+
+// --- Init ---
+
+document.addEventListener('DOMContentLoaded', async () => {
+  await initTheme();
+
   render();
+
+  document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
 
   document.getElementById('btn-refresh').addEventListener('click', render);
 
