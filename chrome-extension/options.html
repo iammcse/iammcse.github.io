@@ -1,24 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="auto">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Time Controller - Options</title>
+<title>KSC hub - Options</title>
 <style>
+  /* --- Material 3 Design Tokens --- */
   :root {
-    --bg: #f5f5f5;
-    --card-bg: #fff;
-    --text: #333;
-    --text-secondary: #666;
-    --border: #ddd;
-    --primary: #1a73e8;
-    --primary-hover: #1557b0;
-    --danger: #d93025;
-    --danger-hover: #b3261e;
-    --radius: 8px;
-    --shadow: 0 1px 3px rgba(0,0,0,0.1);
+    --bg: #fef7ff;
+    --surface: #ffffff;
+    --surface-variant: #f0efed;
+    --primary: #0b57d0;
+    --on-primary: #ffffff;
+    --primary-container: #d3e3fd;
+    --on-primary-container: #041e49;
+    --text: #1f1f1f;
+    --text-secondary: #444746;
+    --border: #c4c7c5;
+    --error: #b3261e;
+    --error-container: #f9dedc;
+    --success: #146c2e;
+    --success-container: #cce8d4;
+    --shadow: 0 1px 2px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.06);
+    --shadow-elevated: 0 1px 2px rgba(0,0,0,0.12), 0 2px 6px rgba(0,0,0,0.08);
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-pill: 20px;
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --transition: 150ms ease;
   }
 
+  [data-theme="dark"] {
+    --bg: #1a1c1e;
+    --surface: #282a2d;
+    --surface-variant: #35383b;
+    --primary: #a8c7fa;
+    --on-primary: #062e6f;
+    --primary-container: #0842a0;
+    --on-primary-container: #d3e3fd;
+    --text: #e3e3e3;
+    --text-secondary: #b9bbbe;
+    --border: #44464a;
+    --error: #f2b8b5;
+    --error-container: #8c1d18;
+    --success: #a8dab5;
+    --success-container: #1b4d28;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 1px 3px rgba(0,0,0,0.2);
+    --shadow-elevated: 0 1px 2px rgba(0,0,0,0.4), 0 2px 6px rgba(0,0,0,0.3);
+  }
+
+  /* --- Reset & Base --- */
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
@@ -26,228 +61,438 @@
     background: var(--bg);
     color: var(--text);
     line-height: 1.5;
-    padding: 24px 16px;
+    padding: var(--space-lg) var(--space-md);
+    transition: background var(--transition), color var(--transition);
   }
 
+  /* --- Two-Column Container --- */
   .container {
-    max-width: 720px;
+    max-width: 960px;
     margin: 0 auto;
+    display: flex;
+    gap: var(--space-lg);
+    align-items: flex-start;
   }
 
-  header {
+  .main-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .sidebar {
+    width: 260px;
+    flex-shrink: 0;
+    position: sticky;
+    top: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  /* --- Sidebar Header --- */
+  .sidebar-header {
     text-align: center;
-    margin-bottom: 32px;
   }
 
-  header h1 {
-    font-size: 1.6rem;
+  .sidebar-header h1 {
+    font-size: 1.25rem;
     font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .sidebar-header p {
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+    margin-top: 2px;
+  }
+
+  .sidebar-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
     margin-bottom: 4px;
   }
 
-  header p {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-  }
-
-  .rule-card {
-    background: var(--card-bg);
+  #theme-toggle {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
     border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px;
-    margin-bottom: 16px;
+    background: var(--surface);
+    color: var(--text);
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background var(--transition);
+    flex-shrink: 0;
+  }
+  #theme-toggle:hover { background: var(--surface-variant); }
+
+  /* --- Sidebar Auth --- */
+  #auth-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md);
     box-shadow: var(--shadow);
   }
 
+  .auth-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .btn-auth {
+    padding: 10px 16px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    text-align: center;
+    transition: background var(--transition);
+    width: 100%;
+  }
+
+  .btn-github { background: #24292e; color: #fff; border-color: #24292e; }
+  .btn-github:hover { background: #1b1f23; }
+  [data-theme="dark"] .btn-github { background: #444c56; border-color: #444c56; }
+  [data-theme="dark"] .btn-github:hover { background: #545d68; }
+
+  .btn-google { background: var(--surface); color: var(--text); }
+  .btn-google:hover { background: var(--surface-variant); }
+
+  .auth-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    text-align: center;
+  }
+
+  .auth-profile-top {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .auth-avatar {
+    border-radius: 50%;
+    flex-shrink: 0;
+    background: var(--surface-variant);
+  }
+
+  .auth-name {
+    font-weight: 600;
+    font-size: 0.85rem;
+  }
+
+  .auth-provider-badge {
+    font-size: 0.65rem;
+    color: var(--text-secondary);
+    background: var(--surface-variant);
+    padding: 2px 8px;
+    border-radius: var(--radius-pill);
+    text-transform: capitalize;
+    font-weight: 500;
+    display: inline-block;
+    margin-top: 2px;
+  }
+
+  .auth-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    width: 100%;
+    margin-top: var(--space-xs);
+  }
+  .auth-actions .btn { flex: 1; font-size: 0.75rem; padding: 8px 12px; height: auto; }
+
+  /* --- Sidebar IO --- */
+  .io-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md);
+    box-shadow: var(--shadow);
+  }
+
+  .io-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    text-align: center;
+  }
+
+  .io-actions .btn {
+    width: 100%;
+    font-size: 0.8rem;
+    padding: 8px 16px;
+    height: auto;
+  }
+
+  /* --- Shared Buttons --- */
+  .btn {
+    padding: 10px 24px;
+    border: none;
+    border-radius: var(--radius-pill);
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background var(--transition), box-shadow var(--transition);
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .btn-primary {
+    background: var(--primary);
+    color: var(--on-primary);
+  }
+  .btn-primary:hover { box-shadow: var(--shadow-elevated); filter: brightness(1.05); }
+
+  .btn-secondary {
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .btn-secondary:hover { background: var(--surface-variant); }
+
+  .btn-add {
+    display: flex;
+    width: 100%;
+    background: none;
+    border: 2px dashed var(--border);
+    color: var(--text-secondary);
+    padding: var(--space-md);
+    margin-bottom: var(--space-md);
+    border-radius: var(--radius-lg);
+    font-size: 0.875rem;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 500;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    transition: border-color var(--transition), color var(--transition);
+  }
+  .btn-add:hover { border-color: var(--primary); color: var(--primary); }
+
+  .auth-btn-loading { opacity: 0.6; pointer-events: none; }
+
+  /* --- Rule Cards --- */
+  .rule-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--primary);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-md);
+    box-shadow: var(--shadow);
+    transition: box-shadow var(--transition);
+  }
+  .rule-card:hover { box-shadow: var(--shadow-elevated); }
+
   .rule-header {
     display: flex;
-    gap: 8px;
+    gap: var(--space-sm);
     align-items: center;
-    margin-bottom: 16px;
+    margin-bottom: var(--space-md);
   }
 
   .rule-name {
     flex: 1;
-    font-size: 1.1rem;
-    font-weight: 600;
-    padding: 6px 10px;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 8px 14px;
     border: 1px solid var(--border);
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
+    background: var(--surface);
+    color: var(--text);
+    font-family: inherit;
+    height: 44px;
+    transition: border-color var(--transition);
   }
+  .rule-name:focus { border-color: var(--primary); outline: none; }
 
   .btn-delete {
     background: none;
     border: none;
-    color: var(--danger);
-    font-size: 1.3rem;
+    color: var(--error);
+    font-size: 1.4rem;
     cursor: pointer;
-    padding: 4px 8px;
-    border-radius: 4px;
-    line-height: 1;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background var(--transition);
+    flex-shrink: 0;
   }
+  .btn-delete:hover { background: var(--error-container); }
 
-  .btn-delete:hover {
-    background: #fce8e6;
-  }
-
+  /* --- Time Row --- */
   .rule-row {
     display: flex;
-    gap: 16px;
-    margin-bottom: 12px;
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
     flex-wrap: wrap;
   }
 
-  .rule-row label {
+  .rule-row .field {
     display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 0.9rem;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .rule-row .field label {
+    font-size: 0.75rem;
+    font-weight: 600;
     color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
 
   .rule-row input[type="time"] {
-    padding: 4px 8px;
+    padding: 8px 14px;
     border: 1px solid var(--border);
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
     font-size: 0.9rem;
     font-family: inherit;
+    background: var(--surface);
+    color: var(--text);
+    height: 44px;
+    transition: border-color var(--transition);
   }
+  .rule-row input[type="time"]:focus { border-color: var(--primary); outline: none; }
 
+  /* --- Day Chips --- */
   .rule-days {
     display: flex;
-    gap: 8px;
+    gap: var(--space-xs);
     flex-wrap: wrap;
-    margin-bottom: 12px;
+    margin-bottom: var(--space-md);
   }
 
   .rule-days label {
     display: flex;
     align-items: center;
-    gap: 3px;
-    font-size: 0.85rem;
+    justify-content: center;
+    width: 44px;
+    height: 32px;
+    font-size: 0.75rem;
+    font-weight: 600;
     cursor: pointer;
-    padding: 3px 8px;
     border: 1px solid var(--border);
-    border-radius: 4px;
+    border-radius: var(--radius-pill);
+    background: var(--surface);
+    color: var(--text-secondary);
+    transition: all var(--transition);
     user-select: none;
   }
+  .rule-days label:hover { background: var(--surface-variant); }
+
+  .rule-days input[type="checkbox"] { position: absolute; opacity: 0; pointer-events: none; }
 
   .rule-days label:has(:checked) {
-    background: #e8f0fe;
+    background: var(--primary-container);
     border-color: var(--primary);
-    color: var(--primary);
+    color: var(--on-primary-container);
   }
 
-  .rule-days input[type="checkbox"] {
-    accent-color: var(--primary);
-  }
-
+  /* --- Details / Collapsible Sections --- */
   details {
-    margin-top: 12px;
+    margin-top: var(--space-sm);
     border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    padding: 8px 14px;
   }
-
-  details[open] {
-    padding-bottom: 12px;
-  }
+  details[open] { padding-bottom: 14px; }
 
   summary {
     cursor: pointer;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: var(--text-secondary);
     font-weight: 500;
-    padding: 2px 0;
+    padding: 4px 0;
+    user-select: none;
   }
+  summary::marker { color: var(--text-secondary); }
 
   .hint {
     font-weight: 400;
-    font-size: 0.8rem;
-    color: #999;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    opacity: 0.7;
   }
 
   textarea {
     width: 100%;
-    margin-top: 8px;
-    padding: 8px;
+    margin-top: var(--space-sm);
+    padding: 10px 14px;
     border: 1px solid var(--border);
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
     font-family: monospace;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     resize: vertical;
-  }
-
-  .btn {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    cursor: pointer;
-    font-family: inherit;
-  }
-
-  .btn-primary {
-    background: var(--primary);
-    color: #fff;
-  }
-
-  .btn-primary:hover { background: var(--primary-hover); }
-
-  .btn-secondary {
-    background: #fff;
+    background: var(--surface);
     color: var(--text);
-    border: 1px solid var(--border);
+    transition: border-color var(--transition);
+    min-height: 48px;
   }
+  textarea:focus { border-color: var(--primary); outline: none; }
 
-  .btn-secondary:hover { background: #f0f0f0; }
-
-  .btn-add {
-    display: block;
-    width: 100%;
-    background: none;
-    border: 2px dashed var(--border);
-    color: var(--text-secondary);
-    padding: 14px;
-    margin-bottom: 20px;
-    border-radius: var(--radius);
-    font-size: 0.9rem;
-    cursor: pointer;
-  }
-
-  .btn-add:hover {
-    border-color: var(--primary);
-    color: var(--primary);
-  }
-
+  /* --- Action Bars --- */
   .actions {
     display: flex;
-    gap: 12px;
+    gap: var(--space-sm);
     justify-content: center;
   }
 
+  /* --- Status --- */
   .status-success, .status-error {
     text-align: center;
-    margin-top: 16px;
-    padding: 8px;
-    border-radius: 4px;
-    font-size: 0.85rem;
+    margin-top: var(--space-md);
+    padding: 10px var(--space-md);
+    border-radius: var(--radius-pill);
+    font-size: 0.8rem;
     font-weight: 500;
   }
+  .status-success { background: var(--success-container); color: var(--success); }
+  .status-error   { background: var(--error-container); color: var(--error); }
 
-  .status-success { background: #e6f4ea; color: #137333; }
-  .status-error   { background: #fce8e6; color: #c5221f; }
+  /* --- Responsive --- */
+  @media (max-width: 700px) {
+    .container {
+      flex-direction: column;
+    }
+    .sidebar {
+      width: 100%;
+      position: static;
+      order: -1;
+    }
+    .auth-actions { flex-wrap: wrap; }
+    .auth-actions .btn { flex: 1 1 auto; }
+  }
 </style>
 </head>
 <body>
 <div class="container">
-  <header>
-    <h1>Time-Based Chrome Controller</h1>
-    <p>Configure time-based rules for extensions and startup tabs.</p>
-  </header>
-
-  <main>
+  <div class="main-content">
     <div id="rules-container"></div>
 
     <button type="button" id="add-rule" class="btn-add">+ Add Rule</button>
@@ -258,9 +503,47 @@
     </div>
 
     <div id="status"></div>
-  </main>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-header-row">
+        <h1>KSC hub</h1>
+        <button type="button" id="theme-toggle" title="Toggle theme">☀️</button>
+      </div>
+      <p>Configure time-based rules for extensions and startup tabs.</p>
+    </div>
+
+    <section id="auth-section">
+      <div id="auth-logged-out" class="auth-buttons">
+        <button type="button" id="login-github" class="btn btn-auth btn-github">Login with GitHub</button>
+        <button type="button" id="login-google" class="btn btn-auth btn-google">Login with Google</button>
+      </div>
+      <div id="auth-logged-in" class="auth-profile" hidden>
+        <div class="auth-profile-top">
+          <img id="auth-avatar" class="auth-avatar" src="" alt="" width="28" height="28">
+          <span id="auth-name" class="auth-name"></span>
+        </div>
+        <span id="auth-provider-badge" class="auth-provider-badge"></span>
+        <div class="auth-actions">
+          <button type="button" id="backup-btn" class="btn btn-primary" title="Save current settings to cloud">Backup</button>
+          <button type="button" id="restore-btn" class="btn btn-secondary" title="Overwrite local settings with cloud backup">Restore</button>
+          <button type="button" id="logout-btn" class="btn btn-secondary">Logout</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="io-actions">
+      <span class="io-label">Settings File</span>
+      <button type="button" id="export-btn" class="btn btn-secondary">Export Settings</button>
+      <button type="button" id="import-btn" class="btn btn-secondary">Import Settings</button>
+      <input type="file" id="import-file" accept=".config,.json" hidden>
+    </div>
+  </aside>
 </div>
 
+<script src="auth.js"></script>
+<script src="sync.js"></script>
 <script src="options.js"></script>
 </body>
 </html>

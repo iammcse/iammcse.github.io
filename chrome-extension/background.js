@@ -1,4 +1,6 @@
-// Time-Based Chrome Controller - Background Service Worker
+// KSC hub - Background Service Worker
+
+importScripts('auth.js', 'sync.js');
 
 const DEFAULT_CONFIG = {
   rules: [
@@ -119,16 +121,51 @@ async function applyExtensions(rule) {
 
 // --- Startup tabs ---
 
+async function waitForWindow(attempts) {
+  for (let i = 0; i < attempts; i++) {
+    const windows = await chrome.windows.getAll();
+    if (windows.length > 0) return windows[0].id;
+    await new Promise(r => setTimeout(r, 250));
+  }
+  return null;
+}
+
 async function openStartupTabs(rule) {
-  if (!rule || !rule.startupTabs) return;
-  for (const url of rule.startupTabs) {
-    const trimmed = url.trim();
-    if (!trimmed) continue;
+  if (!rule || !rule.startupTabs || !rule.startupTabs.length) return;
+
+  const urls = rule.startupTabs.map(s => s.trim()).filter(Boolean);
+  if (!urls.length) return;
+
+  // onStartup fires early — wait for Chrome to create its first window
+  const windowId = await waitForWindow(8);
+
+  const tabIds = [];
+  for (let i = 0; i < urls.length; i++) {
     try {
-      await chrome.tabs.create({ url: trimmed, active: false });
+      const tab = await chrome.tabs.create({
+        url: urls[i],
+        active: i === 0,
+        windowId
+      });
+      tabIds.push(tab.id);
     } catch (e) {
-      console.warn('Cannot open tab', trimmed, ':', e.message);
+      console.warn('Cannot open startup tab', urls[i], ':', e.message);
     }
+  }
+
+  // Remove blank / new-tab placeholders Chrome opens by default so the
+  // user sees only the configured startup tabs
+  if (tabIds.length > 0) {
+    try {
+      const firstTab = await chrome.tabs.get(tabIds[0]);
+      const tabs = await chrome.tabs.query({ windowId: firstTab.windowId });
+      for (const tab of tabs) {
+        if (tabIds.includes(tab.id)) continue;
+        if (!tab.url || tab.url === 'chrome://newtab/' || tab.url === 'about:newtab' || tab.url === 'about:blank') {
+          chrome.tabs.remove(tab.id).catch(() => {});
+        }
+      }
+    } catch (e) { /* non-critical */ }
   }
 }
 
@@ -140,6 +177,40 @@ async function scheduleNextAlarm(rules) {
   if (next) {
     await chrome.alarms.create('timerule', { when: next.getTime() });
     console.log('Next transition:', next.toLocaleString());
+  }
+}
+
+// --- Auto-backup helpers ---
+
+async function hashConfig(config) {
+  const json = JSON.stringify(config);
+  const data = new TextEncoder().encode(json);
+  const hash = await crypto.subtle.digest('SHA-256', data);
+  return Array.from(new Uint8Array(hash))
+    .map(b => b.toString(16).padStart(2, '0'))
+    .join('');
+}
+
+async function autoBackupIfNeeded() {
+  try {
+    const authData = await chrome.storage.local.get('auth');
+    if (!authData.auth || !authData.auth.provider) return;
+
+    const { config, lastBackupHash } = await chrome.storage.local.get(['config', 'lastBackupHash']);
+    if (!config || !config.rules || config.rules.length === 0) return;
+
+    const currentHash = await hashConfig(config);
+    if (currentHash === lastBackupHash) return;
+
+    const result = await syncBackupConfig(config);
+    if (result.success) {
+      await chrome.storage.local.set({ lastBackupHash: currentHash });
+      console.log('Auto-backup: ' + result.message);
+    } else {
+      console.warn('Auto-backup failed: ' + result.message);
+    }
+  } catch (e) {
+    console.warn('Auto-backup error:', e.message);
   }
 }
 
@@ -162,15 +233,47 @@ async function applyCurrentRules() {
   });
 }
 
-// --- Event listeners ---
+// --- Startup handling ---
+// onStartup only fires when the Chrome profile fully restarts.  On Windows
+// Chrome often stays resident in the system tray even after all windows are
+// closed, so onStartup won't fire.  chrome.windows.onCreated is the fallback:
+// the first window created after a gap counts as a session start.
 
-chrome.runtime.onStartup.addListener(async () => {
+async function handleStartup() {
+  // Dedup so we open startup tabs at most once per session.  If Chrome
+  // never fully quit (background mode) we treat a gap of 2+ hours as a
+  // fresh session so tabs still open each morning / after long breaks.
+  const { openedAt } = await chrome.storage.session.get('startupTabsOpenedAt');
+  if (openedAt) {
+    const elapsed = Date.now() - openedAt;
+    if (elapsed < 2 * 60 * 60 * 1000) return;
+  }
+  await chrome.storage.session.set({ startupTabsOpenedAt: Date.now() });
+
   const config = await getConfig();
   const now = new Date();
   const rule = getActiveRule(config.rules, now);
   await applyExtensions(rule);
   await openStartupTabs(rule);
   await scheduleNextAlarm(config.rules);
+
+  const existingAlarm = await chrome.alarms.get('autobackup');
+  if (!existingAlarm) {
+    await chrome.alarms.create('autobackup', { periodInMinutes: 360 });
+  }
+}
+
+// --- Event listeners ---
+
+chrome.runtime.onStartup.addListener(async () => {
+  // Profile restarted — discard any stale session flag
+  await chrome.storage.session.remove('startupTabsOpenedAt');
+  await handleStartup();
+});
+
+// Fallback: first window created when Chrome never fully quit (background mode)
+chrome.windows.onCreated.addListener(async () => {
+  await handleStartup();
 });
 
 chrome.runtime.onInstalled.addListener(async () => {
@@ -185,18 +288,28 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
   if (alarm.name === 'timerule') {
     await applyCurrentRules();
   }
+  if (alarm.name === 'autobackup') {
+    await autoBackupIfNeeded();
+  }
 });
+
+let _backupDebounceTimer = null;
 
 chrome.storage.onChanged.addListener(async (changes, areaName) => {
   if (areaName === 'local' && changes.config) {
     console.log('Config changed, re-applying rules');
     await applyCurrentRules();
+
+    if (_backupDebounceTimer) clearTimeout(_backupDebounceTimer);
+    _backupDebounceTimer = setTimeout(() => {
+      autoBackupIfNeeded();
+    }, 30000);
   }
 });
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.type === 'applyNow') {
     applyCurrentRules().then(() => sendResponse({ ok: true }));
-    return true; // keep channel open for async response
+    return true;
   }
 });

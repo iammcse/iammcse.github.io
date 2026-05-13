@@ -1,4 +1,4 @@
-// Time-Based Chrome Controller - Options Page Script
+// KSC hub - Options Page Script
 
 const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
@@ -116,6 +116,51 @@ function collectRules() {
   return rules;
 }
 
+// --- Import / Export ---
+
+async function exportConfig() {
+  const config = await loadConfig();
+  const json = JSON.stringify(config, null, 2);
+  const blob = new Blob([json], { type: 'application/octet-stream' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'KSC_Hub_settings.config';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showStatus('Settings exported as KSC_Hub_settings.config.', false);
+}
+
+function importConfig(file) {
+  const reader = new FileReader();
+  reader.onload = async (e) => {
+    try {
+      const config = JSON.parse(e.target.result);
+
+      if (!config.rules || !Array.isArray(config.rules)) {
+        showStatus('Invalid file: missing "rules" array.', true);
+        return;
+      }
+
+      for (const rule of config.rules) {
+        if (!rule.name || !rule.startTime || !rule.endTime || !Array.isArray(rule.days)) {
+          showStatus('Invalid file: one or more rules are malformed.', true);
+          return;
+        }
+      }
+
+      await saveConfig(config);
+      renderRules(config.rules);
+      showStatus('Imported ' + config.rules.length + ' rule(s). Saved.', false);
+    } catch (err) {
+      showStatus('Cannot parse file: ' + err.message, true);
+    }
+  };
+  reader.readAsText(file);
+}
+
 function showStatus(message, isError) {
   const el = document.getElementById('status');
   el.textContent = message;
@@ -125,9 +170,98 @@ function showStatus(message, isError) {
   }
 }
 
+// --- Theme ---
+
+const THEME_ICONS = { light: '☀️', dark: '🌙', auto: '◐' };
+const THEME_LABELS = { light: 'Light mode', dark: 'Dark mode', auto: 'Auto (system)' };
+
+let _themeMode = 'auto';
+let _systemDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+function resolveTheme(mode) {
+  if (mode === 'auto') return _systemDark.matches ? 'dark' : 'light';
+  return mode;
+}
+
+async function initTheme() {
+  const stored = await chrome.storage.local.get('theme');
+  _themeMode = stored.theme || 'auto';
+  applyTheme(_themeMode);
+  updateThemeToggle();
+}
+
+function applyTheme(mode) {
+  _themeMode = mode;
+  document.documentElement.setAttribute('data-theme', resolveTheme(mode));
+}
+
+function updateThemeToggle() {
+  const btn = document.getElementById('theme-toggle');
+  if (btn) {
+    btn.textContent = THEME_ICONS[_themeMode];
+    btn.title = THEME_LABELS[_themeMode] + ' — click to switch';
+  }
+}
+
+async function toggleTheme() {
+  const modes = ['light', 'dark', 'auto'];
+  const idx = modes.indexOf(_themeMode);
+  const next = modes[(idx + 1) % 3];
+  applyTheme(next);
+  updateThemeToggle();
+  await chrome.storage.local.set({ theme: next });
+}
+
+// React to system theme changes when in auto mode
+_systemDark.addEventListener('change', () => {
+  if (_themeMode === 'auto') {
+    document.documentElement.setAttribute('data-theme', resolveTheme('auto'));
+  }
+});
+
+// --- Auth UI helpers ---
+
+function updateAuthUI() {
+  const state = authGetState();
+  const loggedOutEl = document.getElementById('auth-logged-out');
+  const loggedInEl = document.getElementById('auth-logged-in');
+
+  if (state.isLoggedIn) {
+    loggedOutEl.hidden = true;
+    loggedInEl.hidden = false;
+    document.getElementById('auth-avatar').src = state.user.picture || state.user.avatar_url || '';
+    document.getElementById('auth-avatar').alt = state.user.name || state.user.login || '';
+    document.getElementById('auth-name').textContent = state.user.name || state.user.login || 'Unknown';
+    document.getElementById('auth-provider-badge').textContent = state.provider;
+  } else {
+    loggedOutEl.hidden = false;
+    loggedInEl.hidden = true;
+  }
+}
+
+function setButtonLoading(btn, isLoading, loadingText) {
+  if (isLoading) {
+    btn.disabled = true;
+    btn.dataset.originalText = btn.textContent;
+    btn.textContent = loadingText;
+    btn.classList.add('auth-btn-loading');
+  } else {
+    btn.disabled = false;
+    btn.textContent = btn.dataset.originalText || btn.textContent;
+    btn.classList.remove('auth-btn-loading');
+  }
+}
+
 // --- Init ---
 
 document.addEventListener('DOMContentLoaded', async () => {
+  // Theme initialization
+  await initTheme();
+
+  // Auth initialization
+  await authInit();
+  updateAuthUI();
+
   const config = await loadConfig();
   renderRules(config.rules);
 
@@ -172,5 +306,87 @@ document.addEventListener('DOMContentLoaded', async () => {
     await saveConfig(DEFAULT_CONFIG);
     renderRules(DEFAULT_CONFIG.rules);
     showStatus('Reset to default rules.', false);
+  });
+
+  document.getElementById('export-btn').addEventListener('click', exportConfig);
+
+  document.getElementById('import-btn').addEventListener('click', () => {
+    document.getElementById('import-file').click();
+  });
+
+  document.getElementById('import-file').addEventListener('change', (e) => {
+    if (e.target.files.length > 0) {
+      importConfig(e.target.files[0]);
+      e.target.value = '';
+    }
+  });
+
+  // --- Theme toggle ---
+
+  document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+
+  // --- Auth event listeners ---
+
+  document.getElementById('login-github').addEventListener('click', async () => {
+    try {
+      setButtonLoading(document.getElementById('login-github'), true, 'Connecting...');
+      await authLoginWithGithub();
+      updateAuthUI();
+      showStatus('Logged in with GitHub.', false);
+    } catch (e) {
+      showStatus('Login failed: ' + e.message, true);
+    } finally {
+      setButtonLoading(document.getElementById('login-github'), false, '');
+    }
+  });
+
+  document.getElementById('login-google').addEventListener('click', async () => {
+    try {
+      setButtonLoading(document.getElementById('login-google'), true, 'Connecting...');
+      await authLoginWithGoogle();
+      updateAuthUI();
+      showStatus('Logged in with Google.', false);
+    } catch (e) {
+      showStatus('Login failed: ' + e.message, true);
+    } finally {
+      setButtonLoading(document.getElementById('login-google'), false, '');
+    }
+  });
+
+  document.getElementById('backup-btn').addEventListener('click', async () => {
+    try {
+      setButtonLoading(document.getElementById('backup-btn'), true, 'Backing up...');
+      const config = await loadConfig();
+      const result = await syncBackupConfig(config);
+      showStatus(result.message, !result.success);
+    } catch (e) {
+      showStatus('Backup failed: ' + e.message, true);
+    } finally {
+      setButtonLoading(document.getElementById('backup-btn'), false, 'Backup Now');
+    }
+  });
+
+  document.getElementById('restore-btn').addEventListener('click', async () => {
+    if (!confirm('Restore settings from the cloud? This will replace your current rules.')) return;
+    try {
+      setButtonLoading(document.getElementById('restore-btn'), true, 'Restoring...');
+      const result = await syncRestoreConfig();
+      if (result.success && result.config) {
+        await saveConfig(result.config);
+        renderRules(result.config.rules);
+      }
+      showStatus(result.message, !result.success);
+    } catch (e) {
+      showStatus('Restore failed: ' + e.message, true);
+    } finally {
+      setButtonLoading(document.getElementById('restore-btn'), false, 'Restore');
+    }
+  });
+
+  document.getElementById('logout-btn').addEventListener('click', async () => {
+    if (!confirm('Sign out? You will need to log in again to back up or restore.')) return;
+    await authLogout();
+    updateAuthUI();
+    showStatus('Logged out.', false);
   });
 });
