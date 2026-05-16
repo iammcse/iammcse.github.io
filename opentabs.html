@@ -181,27 +181,46 @@ const currentServer = {morning: 760, afternoon: 760};
 // const KServer15 = {morning: 30485+140, afternoon: 790}; // SUN morning 16T 4 tabs 30200+270:44
 // const KServer16 = {morning: 30485+150, afternoon: 790}; // SUN morning 16T 4 tabs 30200+300:18
 
-const KServer01 = {morning: 30385+0, afternoon: 30000+0}; // add 40ms-52ms
-const KServer02 = {morning: 30385+30, afternoon: 30000+90};
-const KServer03 = {morning: 30385+60, afternoon: 30000+90}; // (M)16T 2tabs 545ms 55 
-const KServer04 = {morning: 30385+90, afternoon: 30000+90}; // (M)16T 2tabs 575ms 44 (W) 30 // offset ~ 560-565
-const KServer05 = {morning: 30385+120, afternoon: 30000+120};
-const KServer06 = {morning: 30385+150, afternoon: 30000+150};
-const KServer07 = {morning: 30385+180, afternoon: 30000+180}; // (TH) 16T 2tabs 665ms 17
-const KServer08 = {morning: 30385+90, afternoon: 30000+210}; 
-const KServer09 = {morning: 30385+90, afternoon: 30000+240}; // single 810 won
-const KServer10 = {morning: 30385+90, afternoon: 30000+270};
-const KServer11 = {morning: 30385+90, afternoon: 30000+300}; // (TUE)16T 2tabs 785ms won
-const KServer12 = {morning: 30385+90, afternoon: 30000+330};
-const KServer13 = {morning: 30385+90, afternoon: 30000+360};
-const KServer14 = {morning: 30385+90, afternoon: 30000+390}; // SUN morning 16T 4 tabs 30200+240:121
-const KServer15 = {morning: 30385+90, afternoon: 30000+420}; // SUN morning 16T 4 tabs 30200+270:44
-const KServer16 = {morning: 30385+90, afternoon: 30000+450}; // SUN morning 16T 4 tabs 30200+300:18
+// Afternoon 1 Tab 16T  30000+180 TO 30000+360
+// const KServer01 = {morning: 30270, afternoon: 30000+180}; // add 40ms-52ms
+// const KServer02 = {morning: 30270+6, afternoon: 30000+190};
+// const KServer03 = {morning: 30270+12, afternoon: 30000+200}; // (M)16T 2tabs 545ms 55 
+// const KServer04 = {morning: 30270+18, afternoon: 30000+210}; // (M)16T 2tabs 575ms 44 (W) 30 // offset ~ 560-565
+// const KServer05 = {morning: 30270+24, afternoon: 30000+220};
+// const KServer06 = {morning: 30270+30, afternoon: 30000+230};
+// const KServer07 = {morning: 30270+36, afternoon: 30000+240}; // (TH) 16T 2tabs 665ms 17
+// const KServer08 = {morning: 30270+42, afternoon: 30000+250}; 
+// const KServer09 = {morning: 30270+48, afternoon: 30000+260}; // single 810 won
+// const KServer10 = {morning: 30270+54, afternoon: 30000+270};
+// const KServer11 = {morning: 30270+60, afternoon: 30000+280}; // (TUE)16T 2tabs 785ms won
+// const KServer12 = {morning: 30270+66, afternoon: 30000+290};
+// const KServer13 = {morning: 30270+72, afternoon: 30000+300};
+// const KServer14 = {morning: 30270+78, afternoon: 30000+320}; // SUN morning 16T 4 tabs 30200+240:121
+// const KServer15 = {morning: 30270+84, afternoon: 30000+340}; // SUN morning 16T 4 tabs 30200+270:44
+// const KServer16 = {morning: 30270+90, afternoon: 30000+360}; // SUN morning 16T 4 tabs 30200+300:18
 
-const my5600x = {morning: 30400, afternoon: 30100}; // 30385+0 370-380 (45)
-const brave = {morning: 30400, afternoon: 30200}; // 30385+30 400-410 (WON 0.5)
-const ux8608ca = {morning: 30400, afternoon: 30300}; // [TUE] 2TABS  545ms WON
-const edge = {morning: 30420, afternoon: 30400}; // 
+
+const KServer01 = {morning: 30270, afternoon: 30000+180}; // add 40ms-52ms
+const KServer02 = {morning: 30270 + 30, afternoon: 30000+190};
+const KServer03 = {morning: 30270 + 60, afternoon: 30000+200}; // (M)16T 2tabs 545ms 55 
+const KServer04 = {morning: 30270 + 90, afternoon: 30000+210}; // (M)16T 2tabs 575ms 44 (W) 30 // offset ~ 560-565
+const KServer05 = {morning: 30270, afternoon: 30000+220};
+const KServer06 = {morning: 30270 + 30, afternoon: 30000+230};
+const KServer07 = {morning: 30270 + 60, afternoon: 30000+240}; // (TH) 16T 2tabs 665ms 17
+const KServer08 = {morning: 30270 + 90, afternoon: 30000+250}; 
+const KServer09 = {morning: 30270, afternoon: 30000+260}; // single 810 won
+const KServer10 = {morning: 30270 + 30, afternoon: 30000+270};
+const KServer11 = {morning: 30270 + 60, afternoon: 30000+280}; // (TUE)16T 2tabs 785ms won
+const KServer12 = {morning: 30270, afternoon: 30000+290};
+const KServer13 = {morning: 30270 + 30, afternoon: 30000+300};
+const KServer14 = {morning: 30270 + 60, afternoon: 30000+320}; // SUN morning 16T 4 tabs 30200+240:121
+const KServer15 = {morning: 30270 + 90, afternoon: 30000+340}; // SUN morning 16T 4 tabs 30200+270:44
+const KServer16 = {morning: 30270 + 120, afternoon: 30000+360}; // SUN morning 16T 4 tabs 30200+300:18
+
+const my5600x = {morning: 30000+180, afternoon: 30100}; // 30385+0 370-380 (45)
+const brave = {morning: 30000+70, afternoon: 30200}; // 30385+30 400-410 (WON 0.5)
+const ux8608ca = {morning: 30000+200, afternoon: 30300}; // [TUE] 2TABS  545ms WON
+const edge = {morning: 30000+220, afternoon: 30400}; // 
 
 const Wildcard = {morning: 790, afternoon: 30200+220}; //
 const win7ssd = {morning: 1050, afternoon: 30805}; //
