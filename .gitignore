@@ -1,2 +1,9 @@
 .claude/worktrees/
-/.claude/worktrees/chrome-extension/auth.js
+/.claude/worktrees
+/chrome-extension/auth.js
+.env
+node_modules/
+.next/
+.out/
+.dist/
+.build/
