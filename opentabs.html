@@ -185,24 +185,41 @@ const currentServer = {morning: 760, afternoon: 760};
 // const KServer15 = {morning: 30360 + 168, afternoon: 30000 + 295}; // 30360 + 168 [136] > [139]
 // const KServer16 = {morning: 30360 + 180, afternoon: 30000 + 270}; // 30360 + 180 [139] > [70]
 
-const KServer01 = {morning: 30360+12 + 30, afternoon: 30000 + 270 + 90}; //* 30360 + 0 [58] > [106] /30360 + 12 + 30 [10]
-const KServer02 = {morning: 30360+12 + 12, afternoon: 30000 + 270 + 45}; //* 30360 + 12 [20] > [10] /30360 + 12 + 12 [29]
-const KServer03 = {morning: 30360+12 + 5, afternoon: 30000 + 270}; //* 30360 + 24 [16] > [79] /30360 + 12 + 5 [4]
-const KServer04 = {morning: 30360+12 - 15, afternoon: 30000 + 270}; // 30360 + 36 [141] > [146] /30360 + 12 - 15 [116]
-const KServer05 = {morning: 30360+12 + 0, afternoon: 30000 + 270}; // 30360 + 48 [4] > [144] /30360 + 12 - 2 [105]
-const KServer06 = {morning: 30360+12 - 20, afternoon: 30000 + 270 - 45}; //* 30360 + 60 [WON] > [142] /30360 + 12 - 20 [22]
-const KServer07 = {morning: 30360+12 - 3, afternoon: 30000 + 270}; // 30360 + 72 [WON] > [13] /30360 + 12 - 3 [28]
-const KServer08 = {morning: 30360+12 - 60, afternoon: 30000 + 270 - 90}; // 30360 + 84 [134] > [143] /30360 + 12 - 30 [166]
-const KServer09 = {morning: 30360+12 + 0, afternoon: 30000 + 270}; // 30360 + 96 [142] > [96] /30360 + 12 + 0 [40]
-const KServer10 = {morning: 30360+12 - 30, afternoon: 30000 + 270 - 60}; // 30360 + 108 [137] > [145]/30360 + 12 - 30 [106]
-const KServer11 = {morning: 30360+12 + 5 , afternoon: 30000 + 270}; //* 30360 + 120 [WON] > [98]/30360 + 12 +5 [23]
-const KServer12 = {morning: 30360+12 - 50, afternoon: 30000 + 270 - 60}; //* 30360 + 132 [135] > [141]/30360 + 12 - 40  [14]
-const KServer13 = {morning: 30360+12 + 5, afternoon: 30000 + 270}; // 30360 + 144 [133] > [94]/30360 + 12 + 5  [100]
-const KServer14 = {morning: 30360+12 - 5, afternoon: 30000 + 270}; // 30360 + 156 [140] > [140]/30360 + 12 - 5  [111]
-const KServer15 = {morning: 30360+12 - 50, afternoon: 30000 + 270 - 60}; // 30360 + 168 [136] > [139] /30360 + 12 - 30  [169]
-const KServer16 = {morning: 30360+12 + 30, afternoon: 30000 + 270}; // next line
-// 30360 + 180 [139] > [70] * 30360 + 12 + 30 [WON] with 9.12 score /30360 + 12 + 30  []
+//8.68
+const KServer01 = {morning: 30360 + 42, afternoon: 30000 + 180 + 120}; //* +0 [58] > [106] /+42 [10] /+42 [77]
+//10.3
+const KServer02 = {morning: 30360 + 24, afternoon: 30000 + 180 + 100}; //* +12 [20] > [10] /+24 [29] /+24 [14]
+//10.1
+const KServer03 = {morning: 30360 + 17, afternoon: 30000 + 180 + 80}; //*  +24 [16] > [79] /+17 [4] /+17 [67]
+//12.1
+const KServer04 = {morning: 30360 - 3, afternoon: 30000 + 180 + 40}; //  +36 [141] > [146] /-3 [116] /-3 [29]
+//9.98
+const KServer05 = {morning: 30360 + 12, afternoon: 30000 + 180 + 115}; // +48 [4] > [144] /+10 [105] /+12 [39]
+//12.9
+const KServer06 = {morning: 30360 - 8, afternoon: 30000 + 180 + 41}; //*  +60 [WON] > [142] /-8 [22] /-8 [24]
+//9.64
+const KServer07 = {morning: 30360 + 9, afternoon: 30000 + 180 + 110}; // +72 [WON] > [13] /30360 +9 [28] /+9 [46]
+//14.4
+const KServer08 = {morning: 30360 - 48, afternoon: 30000 + 180}; //  +84 [134] > [143] /-18 [166] /-48 [127]
+//10.1
+const KServer09 = {morning: 30360 + 12, afternoon: 30000 + 180 + 117}; //  +96 [142] > [96] /+12 [40] /+12 [32]
+//14.4
+const KServer10 = {morning: 30360 - 18, afternoon: 30000 + 180 + 24}; // +108 [137] > [145]/-18 [106] /-18 [89]
+//10.3
+const KServer11 = {morning: 30360 + 17 , afternoon: 30000 + 180 + 80}; //*  +120 [WON] > [98]/+17 [23] /+17 [25]
+//14.5
+const KServer12 = {morning: 30360 - 38, afternoon: 30000 + 180 + 19}; //* +132 [135] > [141]/-28  [14] /-38 [15]
+//10.5
+const KServer13 = {morning: 30360 + 17, afternoon: 30000 + 180 + 80}; //  +144 [133] > [94]/+17  [100] /+17 [44]
+//10.0
+const KServer14 = {morning: 30360 + 7, afternoon: 30000 + 180 + 108}; //  +156 [140] > [140]/+7 [111] /+7 [90]
+//14.5
+const KServer15 = {morning: 30360 - 38, afternoon: 30000 + 180 + 19}; // +168 [136] > [139] /-18 [169] /-38 [87]
+//9.32
+const KServer16 = {morning: 30360 + 42, afternoon: 30000 + 180 + 123}; // next line
+// +180 [139] > [70] * 30360 + 12 + 30 [WON] with 9.12 score /+48 []  /+42 [30]
 
+//0.248 pts/person, 60ms = 2.8pts = 11.3 person, use this formula (5.3 ms per person) 16T, 21.42ms per 1.0 pt
 
 const my5600x = {morning: 30000 + 240, afternoon: 30000 + 170}; // 
 const brave = {morning: 30000 + 255, afternoon: 30000 + 190}; // 30000 + 240 [WON] > [11]
