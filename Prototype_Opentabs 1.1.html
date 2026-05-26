@@ -44,8 +44,16 @@
     padding: 0px;
   }
 
-  #urlParamsTable {
+  #infoBar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
     margin: 20px auto;
+    flex-wrap: wrap;
+  }
+
+  #urlParamsTable {
     border-collapse: collapse;
     color: #ccc;
     font: 12px/150% "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
@@ -69,8 +77,6 @@
   #sessionInfo {
     font: small-caps lighter 15px/150% "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
     text-align:center;
-    width: 100%;
-    margin: 20px auto;
     color:#fff;
     border-left: 3px solid #4caf50;
     padding: 8px;
@@ -83,13 +89,15 @@
 <p id="triggerTime"></p>
 <p id="Canvas"></p>
 
-<table id="urlParamsTable">
-  <caption>URL Parameters</caption>
-  <thead><tr><th>Key</th><th>Value</th></tr></thead>
-  <tbody></tbody>
-</table>
+<div id="infoBar">
+  <table id="urlParamsTable">
+    <caption>URL Parameters</caption>
+    <thead><tr><th>Key</th><th>Value</th></tr></thead>
+    <tbody></tbody>
+  </table>
 
-<div id="sessionInfo"></div>
+  <div id="sessionInfo"></div>
+</div>
 
 <a target="_blank" href="https://www.tutorialspoint.com/how-do-i-trigger-a-function-when-the-time-reaches-a-specific-time-in-javascript">Reference for time</a>
 
