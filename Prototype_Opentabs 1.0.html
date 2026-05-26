@@ -75,24 +75,42 @@ class ServerRegistry {
   }
 
   _registerKServers() {
-    var afternoonOffsets = [225, 270, 290, 225, 270, 290, 225, 270, 290, 225, 270, 290, 225, 270, 290, 270];
-    for (var i = 0; i < 16; i++) {
+    var offsets = [
+      [360, 225], 
+      [372, 270], 
+      [384, 290], 
+      [396, 225],
+      [408, 270], 
+      [420, 290], 
+      [432, 225], 
+      [444, 270],
+      [456, 290], 
+      [468, 225], 
+      [480, 270], 
+      [492, 290],
+      [504, 225], 
+      [516, 270], 
+      [528, 290], 
+      [540, 270]
+    ];
+    for (var i = 0; i < offsets.length; i++) {
       var num = String(i + 1).padStart(2, '0');
       var name = 'KServer' + num;
-      var morning = 30360 + (i * 12);
-      var afternoon = 30000 + afternoonOffsets[i];
+      var morning   = 30000 + offsets[i][0];
+      var afternoon = 30000 + offsets[i][1];
       this._configs.set(name, new ServerConfig(name, 'KS' + num, morning, afternoon));
     }
   }
 
   _registerNamed() {
-    this._configs.set('my5600x',          new ServerConfig('my5600x',          'my5600x',          30000 + 210, 30000 + 130));
-    this._configs.set('brave',            new ServerConfig('brave',            'brave',            30000 + 240, 30000 + 150));
-    this._configs.set('ux8608ca',         new ServerConfig('ux8608ca',         'ux8608ca',         30000 + 270, 30000 + 150));
-    this._configs.set('edge',             new ServerConfig('edge',             'edge',             30000 + 290, 30000 + 150));
-    this._configs.set('Wildcard',         new ServerConfig('Wildcard',         'Wildcard',         880,         30200 + 220));
-    this._configs.set('win7ssd',          new ServerConfig('win7ssd',          'win7ssd',          30000 + 360, 30000 + 270));
-    this._configs.set('AllBraveKservers', new ServerConfig('AllBraveKservers', 'AllBraveKservers', 950,         950));
+    var n;
+    n = 'my5600x';          this._configs.set(n, new ServerConfig(n, n, 30000 + 210, 30000 + 130));
+    n = 'brave';            this._configs.set(n, new ServerConfig(n, n, 30000 + 240, 30000 + 150));
+    n = 'ux8608ca';         this._configs.set(n, new ServerConfig(n, n, 30000 + 270, 30000 + 150));
+    n = 'edge';             this._configs.set(n, new ServerConfig(n, n, 30000 + 290, 30000 + 150));
+    n = 'Wildcard';         this._configs.set(n, new ServerConfig(n, n, 880,         30200 + 220));
+    n = 'win7ssd';          this._configs.set(n, new ServerConfig(n, n, 30000 + 360, 30000 + 270));
+    n = 'AllBraveKservers'; this._configs.set(n, new ServerConfig(n, n, 950,         950));
   }
 
   lookup(name) {
