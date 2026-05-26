@@ -113,43 +113,60 @@ class ServerRegistry {
     this._registerKServers();
     this._registerNamed();
   }
-
+//0.248 pts/person, 60ms = 2.8pts = 11.3 person, use this formula (5.3 ms per person) 16T, 21.42ms per 1.0 pt
   _registerKServers() {
     var offsets = [
-      [360, 225], //
-      [372, 270],
-      [384, 290],
-      [396, 225],
-      [408, 270],
-      [420, 290],
-      [432, 225],
-      [444, 270],
-      [456, 290],
-      [468, 225],
-      [480, 270],
-      [492, 290],
-      [504, 225],
-      [516, 270],
-      [528, 290],
-      [540, 270]
+      // 01
+      [42, 120],  //+0 [58] > [106] /+42 [10] /+42 [77]
+      // 02
+      [24, 100],  //02* +12 [20] > [10] /+24 [29] /+24 [14]
+      // 03
+      [17, 80],   //03* +24 [16] > [79] /+17 [4] /+17 [67]
+      // 04
+      [-3, 40],   //04 +36 [141] > [146] /-3 [116] /-3 [29]
+      // 05
+      [12, 115],  //05 +48 [4] > [144] /+10 [105] /+12 [39]
+      // 06 *
+      [-8, 110],   //06* +60 [WON] > [142] /-8 [22] /-8 [24]
+      // 07
+      [9, 110],   //07 +72 [WON] > [13] /30360 +9 [28] /+9 [46]
+      // 08
+      [-48, 0],   //08  +84 [134] > [143] /-18 [166] /-48 [127]
+      // 09
+      [12, 117],  //09  +96 [142] > [96] /+12 [40] /+12 [32]
+      // 10 *
+      [-18, 45],  //10 +108 [137] > [145]/-18 [106] /-18 [89]
+      // 11
+      [17, 80],   //11* +120 [WON] > [98]/+17 [23] /+17 [25]
+      // 12 *
+      [-38, 110],  //12* +132 [135] > [141]/-28  [14] /-38 [15]
+      // 13
+      [17, 80],   //13  +144 [133] > [94]/+17  [100] /+17 [44]
+      // 14
+      [7, 108],   //14  +156 [140] > [140]/+7 [111] /+7 [90]
+      // 15 *
+      [-38, 110],  //15 +168 [136] > [139] /-18 [169] /-38 [87]
+      // 16
+      [42, 123]   //16 +180 [139] > [70] * 30360 + 12 + 30 [WON] with 9.12 score /+48 []  /+42 [30]
     ];
     for (var i = 0; i < offsets.length; i++) {
       var num = String(i + 1).padStart(2, '0');
       var name = 'KServer' + num;
-      var morning   = 30000 + offsets[i][0];
-      var afternoon = 30000 + offsets[i][1];
+      var morning   = 30360 + offsets[i][0];
+      var afternoon = 30180 + offsets[i][1];
       this._configs.set(name, new ServerConfig(name, 'KS' + num, morning, afternoon));
     }
   }
+//0.248 pts/person, 60ms = 2.8pts = 11.3 person, use this formula (5.3 ms per person) 16T, 21.42ms per 1.0 pt
 
   _registerNamed() {
     var n;
-    n = 'my5600x';          this._configs.set(n, new ServerConfig(n, n, 30000 + 210, 30000 + 130));
-    n = 'brave';            this._configs.set(n, new ServerConfig(n, n, 30000 + 240, 30000 + 150));
-    n = 'ux8608ca';         this._configs.set(n, new ServerConfig(n, n, 30000 + 270, 30000 + 150));
-    n = 'edge';             this._configs.set(n, new ServerConfig(n, n, 30000 + 290, 30000 + 150));
-    n = 'Wildcard';         this._configs.set(n, new ServerConfig(n, n, 880,         30200 + 220));
-    n = 'win7ssd';          this._configs.set(n, new ServerConfig(n, n, 30000 + 360, 30000 + 270));
+    n = 'my5600x';          this._configs.set(n, new ServerConfig(n, n, 30000 + 240, 30000 + 150));
+    n = 'brave';            this._configs.set(n, new ServerConfig(n, n, 30000 + 255, 30000 + 150));
+    n = 'ux8608ca';         this._configs.set(n, new ServerConfig(n, n, 30000 + 180, 30000 + 150));
+    n = 'edge';             this._configs.set(n, new ServerConfig(n, n, 30000 + 250, 30000 + 150));
+    n = 'Wildcard';         this._configs.set(n, new ServerConfig(n, n, 30360 + 12,         30000 + 270));
+    n = 'win7ssd';          this._configs.set(n, new ServerConfig(n, n, 30360 + 12 + 60,    30000 + 270));
     n = 'AllBraveKservers'; this._configs.set(n, new ServerConfig(n, n, 950,         950));
   }
 
