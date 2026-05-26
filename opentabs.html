@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initialscale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<title>CountDown</title>
+<style>
+   p {
+     text-align: center;
+     font-size: 60px;
+     margin-top: 0px;
+   }
+
+  body {background-color:#2d2d2d;}
+
+   #triggerDate {
+    font: small-caps lighter 13px/150% "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+    text-align:center;
+    width: 100%;
+    margin: 32px auto;
+    color:#fff;
+    border-left: 3px solid #4ced1f;
+    padding: 0px;
+  }
+   #triggerTime {
+    font: small-caps lighter 23px/150% "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+    text-align:center;
+    width: 100%;
+    margin: 32px auto;
+    color:#fff;
+    border-left: 3px solid #99a127;
+    padding: 0px;
+  }
+  #Canvas  {
+    font: small-caps lighter 43px/150% "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+    text-align:center;
+    width: 100%;
+    margin: 32px auto;
+    color:#fff;
+    border-left: 3px solid #ed1f1f;
+    padding: 0px;
+  }
+
+  #urlParamsTable {
+    margin: 16px auto;
+    border-collapse: collapse;
+    color: #ccc;
+    font: 12px/150% "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+  }
+  #urlParamsTable caption {
+    font-size: 13px;
+    color: #aaa;
+    margin-bottom: 6px;
+  }
+  #urlParamsTable th,
+  #urlParamsTable td {
+    padding: 3px 14px;
+    text-align: left;
+    border-bottom: 1px solid #444;
+  }
+  #urlParamsTable th {
+    color: #999;
+    font-weight: 600;
+  }
+
+  #sessionInfo {
+    font: small-caps lighter 15px/150% "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+    text-align:center;
+    width: 100%;
+    margin: 16px auto;
+    color:#fff;
+    border-left: 3px solid #4caf50;
+    padding: 8px;
+  }
+</style>
+</head>
+<body>
+
+<p id="triggerDate"></p>
+<p id="triggerTime"></p>
+<p id="Canvas"></p>
+
+<table id="urlParamsTable">
+  <caption>URL Parameters</caption>
+  <thead><tr><th>Key</th><th>Value</th></tr></thead>
+  <tbody></tbody>
+</table>
+
+<div id="sessionInfo"></div>
+
+<a target="_blank" href="https://www.tutorialspoint.com/how-do-i-trigger-a-function-when-the-time-reaches-a-specific-time-in-javascript">Reference for time</a>
+
+<script>
+class ServerConfig {
+  constructor(name, title, morning, afternoon) {
+    this.name = name;
+    this.title = title;
+    this.morning = morning;
+    this.afternoon = afternoon;
+  }
+}
+
+class ServerRegistry {
+  constructor() {
+    this._configs = new Map();
+    this._registerAll();
+  }
+
+  _registerAll() {
+    this._registerKServers();
+    this._registerNamed();
+  }
+
+  _registerKServers() {
+    var offsets = [
+      [360, 225],
+      [372, 270],
+      [384, 290],
+      [396, 225],
+      [408, 270],
+      [420, 290],
+      [432, 225],
+      [444, 270],
+      [456, 290],
+      [468, 225],
+      [480, 270],
+      [492, 290],
+      [504, 225],
+      [516, 270],
+      [528, 290],
+      [540, 270]
+    ];
+    for (var i = 0; i < offsets.length; i++) {
+      var num = String(i + 1).padStart(2, '0');
+      var name = 'KServer' + num;
+      var morning   = 30000 + offsets[i][0];
+      var afternoon = 30000 + offsets[i][1];
+      this._configs.set(name, new ServerConfig(name, 'KS' + num, morning, afternoon));
+    }
+  }
+
+  _registerNamed() {
+    var n;
+    n = 'my5600x';          this._configs.set(n, new ServerConfig(n, n, 30000 + 210, 30000 + 130));
+    n = 'brave';            this._configs.set(n, new ServerConfig(n, n, 30000 + 240, 30000 + 150));
+    n = 'ux8608ca';         this._configs.set(n, new ServerConfig(n, n, 30000 + 270, 30000 + 150));
+    n = 'edge';             this._configs.set(n, new ServerConfig(n, n, 30000 + 290, 30000 + 150));
+    n = 'Wildcard';         this._configs.set(n, new ServerConfig(n, n, 880,         30200 + 220));
+    n = 'win7ssd';          this._configs.set(n, new ServerConfig(n, n, 30000 + 360, 30000 + 270));
+    n = 'AllBraveKservers'; this._configs.set(n, new ServerConfig(n, n, 950,         950));
+  }
+
+  lookup(name) {
+    if (name && this._configs.has(name)) {
+      return this._configs.get(name);
+    }
+    return new ServerConfig('default', 'default', 760, 760);
+  }
+}
+
+class SessionDetector {
+  constructor() {
+    var today = new Date();
+    this.morningSession   = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 9, 30, 0, 0);
+    this.afternoonSession = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 17, 0, 0, 0);
+    this.midnight         = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 23, 59, 59, 999);
+  }
+
+  computeTargetTime(offsetMorning, offsetAfternoon) {
+    var now = new Date();
+    if (now.getTime() > this.morningSession.getTime() && now.getTime() <= this.afternoonSession.getTime()) {
+      return new Date(this.afternoonSession.getTime() - offsetAfternoon);
+    }
+    if (now.getTime() > this.afternoonSession.getTime() && now.getTime() <= this.midnight.getTime()) {
+      return new Date(this.morningSession.getTime() - offsetMorning + (1000 * 60 * 60 * 24));
+    }
+    return new Date(this.morningSession.getTime() - offsetMorning);
+  }
+
+  getCurrentSession() {
+    var now = new Date();
+    if (now.getTime() > this.morningSession.getTime() && now.getTime() <= this.afternoonSession.getTime()) {
+      return { name: 'Afternoon', activeOffset: 'afternoon' };
+    }
+    if (now.getTime() > this.afternoonSession.getTime() && now.getTime() <= this.midnight.getTime()) {
+      return { name: 'Overnight', activeOffset: 'morning' };
+    }
+    return { name: 'Morning', activeOffset: 'morning' };
+  }
+}
+
+class CountdownDisplay {
+  constructor() {
+    this._dateEl   = document.getElementById('triggerDate');
+    this._timeEl   = document.getElementById('triggerTime');
+    this._canvasEl = document.getElementById('Canvas');
+  }
+
+  showTargetDateTime(targetDate) {
+    this._dateEl.innerHTML = targetDate.toDateString();
+    this._timeEl.innerHTML = targetDate.toLocaleTimeString('en-US', { hour12: false }) + ':' + targetDate.getMilliseconds() + 'mi';
+  }
+
+  updateCountdown(distance) {
+    var days    = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours   = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    this._canvasEl.innerHTML = days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's ';
+  }
+
+  showExpired() {
+    this._canvasEl.innerHTML = 'EXPIRED';
+  }
+}
+
+class App {
+  constructor() {
+    this.kscUrl = 'https://kscgolf2.noq.com.hk/?noq_c=kscgolf&noq_r=https%3A%2F%2Fbooking.kscgolf.org.hk%2FwaitingRoom%3F';
+    this.registry = new ServerRegistry();
+    this.display = new CountdownDisplay();
+    this.detector = new SessionDetector();
+
+    this._parseParams();
+    this._showUrlParams();
+    this._showSessionInfo();
+    this._start();
+  }
+
+  _parseParams() {
+    var qs     = window.location.search;
+    var params = new URLSearchParams(qs);
+
+    var serverParam    = params.get('serverParam');
+    var morningParam   = params.get('morningParam');
+    var afternoonParam = params.get('afternoonParam');
+    this._countdownParam = params.get('countdownParam');
+
+    var offset = params.get('offset');
+    if (!offset) offset = '0';
+    var offsetNum = Number(offset);
+
+    var config = this.registry.lookup(serverParam);
+    document.title = config.title;
+
+    if (morningParam && morningParam !== '0') {
+      this._offsetMorning = Number(morningParam) + offsetNum;
+    } else {
+      this._offsetMorning = config.morning + offsetNum;
+    }
+
+    if (afternoonParam && afternoonParam !== '0') {
+      this._offsetAfternoon = Number(afternoonParam) + offsetNum;
+    } else {
+      this._offsetAfternoon = config.afternoon + offsetNum;
+    }
+
+    this._config = config;
+    this._params = params;
+  }
+
+  _showUrlParams() {
+    var tbody = document.querySelector('#urlParamsTable tbody');
+    var count = 0;
+    this._params.forEach(function (value, key) {
+      var row = tbody.insertRow();
+      row.insertCell().textContent = key;
+      row.insertCell().textContent = value;
+      count++;
+    });
+    if (count === 0) {
+      var row = tbody.insertRow();
+      var cell = row.insertCell();
+      cell.colSpan = 2;
+      cell.textContent = '(none)';
+      cell.style.color = '#666';
+      cell.style.textAlign = 'center';
+    }
+  }
+
+  _showSessionInfo() {
+    var session = this.detector.getCurrentSession();
+    var el = document.getElementById('sessionInfo');
+    var activeOffset = session.activeOffset === 'morning' ? this._config.morning : this._config.afternoon;
+    var offsetLabel  = session.activeOffset === 'morning' ? 'Morning offset' : 'Afternoon offset';
+    el.innerHTML =
+      'Session: <b>' + session.name + '</b>' +
+      ' &nbsp;|&nbsp; Server: <b>' + this._config.name + '</b>' +
+      ' &nbsp;|&nbsp; ' + offsetLabel + ': <b>' + activeOffset + '</b>';
+  }
+
+  _start() {
+    var targetDate = this.detector.computeTargetTime(this._offsetMorning, this._offsetAfternoon);
+    this.display.showTargetDateTime(targetDate);
+
+    var self = this;
+    var distance = targetDate.getTime() - new Date().getTime();
+
+    if (this._countdownParam && this._countdownParam !== '0') {
+      distance = Number(this._countdownParam);
+    }
+
+    setTimeout(function () {
+      window.open(self.kscUrl, '_self');
+    }, distance);
+
+    var interval = setInterval(function () {
+      var remaining = targetDate.getTime() - new Date().getTime();
+      if (remaining < 0) {
+        clearInterval(interval);
+        self.display.showExpired();
+      } else {
+        self.display.updateCountdown(remaining);
+      }
+    }, 100);
+  }
+}
+
+new App();
+</script>
+
+<!--
+  Prototype_Opentabs 1.1 — adds URL params table + session info display
+  --------------------------------------------------------------------
+  Additions over 1.0:
+    - #urlParamsTable   — renders all query string key/value pairs
+    - #sessionInfo      — shows current session name + selected server's offsets
+    - SessionDetector.getCurrentSession() — returns {name, activeOffset}
+    - App._showUrlParams()  — populates the params table
+    - App._showSessionInfo() — renders the session info line
+
+  Prototype_Opentabs 1.0 — OOP refactor of opentabs.html
+  --------------------------------------------------------
+  ServerConfig     - Data class: {name, title, morning, afternoon} for one server.
+  ServerRegistry   - Map-based lookup replacing the 22-case switch statement.
+                      KServer01-16 are formula-generated; 7 named configs are explicit.
+  SessionDetector  - Determines morning (9:30), afternoon (17:00), or overnight session
+                      and computes the target countdown time from offset values.
+  CountdownDisplay - Owns #triggerDate, #triggerTime, #Canvas DOM elements.
+  App              - Orchestrator: parses URL params, wires components, starts the
+                      setTimeout (window.open) and setInterval (100ms countdown tick).
+  -->
+</body>
+</html>
