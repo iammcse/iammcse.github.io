@@ -44,16 +44,8 @@
     padding: 0px;
   }
 
-  #infoBar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 40px;
-    margin: 20px auto;
-    flex-wrap: wrap;
-  }
-
   #urlParamsTable {
+    margin: 20px auto;
     border-collapse: collapse;
     color: #ccc;
     font: 12px/150% "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
@@ -77,6 +69,8 @@
   #sessionInfo {
     font: small-caps lighter 15px/150% "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
     text-align:center;
+    width: 100%;
+    margin: 20px auto;
     color:#fff;
     border-left: 3px solid #4caf50;
     padding: 8px;
@@ -89,15 +83,13 @@
 <p id="triggerTime"></p>
 <p id="Canvas"></p>
 
-<div id="infoBar">
-  <table id="urlParamsTable">
-    <caption>URL Parameters</caption>
-    <thead><tr><th>Key</th><th>Value</th></tr></thead>
-    <tbody></tbody>
-  </table>
+<table id="urlParamsTable">
+  <caption>URL Parameters</caption>
+  <thead><tr><th>Key</th><th>Value</th></tr></thead>
+  <tbody></tbody>
+</table>
 
-  <div id="sessionInfo"></div>
-</div>
+<div id="sessionInfo"></div>
 
 <a target="_blank" href="https://www.tutorialspoint.com/how-do-i-trigger-a-function-when-the-time-reaches-a-specific-time-in-javascript">Reference for time</a>
 
@@ -292,11 +284,12 @@ class App {
   _showSessionInfo() {
     var session = this.detector.getCurrentSession();
     var el = document.getElementById('sessionInfo');
+    var activeOffset = session.activeOffset === 'morning' ? this._config.morning : this._config.afternoon;
+    var offsetLabel  = session.activeOffset === 'morning' ? 'Morning offset' : 'Afternoon offset';
     el.innerHTML =
       'Session: <b>' + session.name + '</b>' +
       ' &nbsp;|&nbsp; Server: <b>' + this._config.name + '</b>' +
-      ' &nbsp;|&nbsp; Morning offset: <b>' + this._config.morning + '</b>' +
-      ' &nbsp;|&nbsp; Afternoon offset: <b>' + this._config.afternoon + '</b>';
+      ' &nbsp;|&nbsp; ' + offsetLabel + ': <b>' + activeOffset + '</b>';
   }
 
   _start() {
